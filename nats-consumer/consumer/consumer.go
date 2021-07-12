@@ -1,16 +1,11 @@
 package consumer
 
 import (
+	"context"
 	"github.com/nats-io/nats.go"
 	"log"
-)
-
-const (
-	URL            = "jupyterhub.brique.kr:4222"
-	subSubjectName = "TEST.NATS"
-
-	User = "myuser"
-	Pass = "mypass"
+	"nats-consumer/config"
+	"strings"
 )
 
 type Consumer struct {
@@ -19,49 +14,64 @@ type Consumer struct {
 	sub *nats.Subscription
 }
 
-func NewConsumer() (*Consumer, error) {
-	nc, err := nats.Connect(URL, nats.UserInfo(User, Pass))
+var Client *Consumer
+
+func NewConsumer(cfg config.Nats) error {
+	if Client != nil {
+		return nil
+	}
+
+	nc, err := nats.Connect(strings.Join(cfg.Servers, ","), nats.UserInfo(cfg.Username, cfg.Password))
 	if err != nil {
-		return nil, err
+		return err
 	}
 	defer nc.Close()
 
 	js, err := nc.JetStream()
 	if err != nil {
-		return nil, err
+		return err
 	}
 
-	sub, err := js.PullSubscribe(subSubjectName, "hello")
+	sub, err := js.PullSubscribe(cfg.Subject, cfg.Group)
 	if err != nil {
-		return nil, err
+		return err
 	}
 
-	return &Consumer{nc: nc, js: js, sub: sub}, nil
+	Client = &Consumer{nc: nc, js: js, sub: sub}
+	return nil
 }
 
 func (c *Consumer) Close() {
+	if err := c.sub.Drain(); err != nil {
+		log.Println(err)
+	}
 	c.nc.Close()
 }
 
-func (c *Consumer) ClaimMessage() error {
-	msgs, err := c.sub.Fetch(1)
+func (c *Consumer) ListenMessage(ctx context.Context) {
+	for {
+		if err := c.claimMessage(); err != nil {
+			log.Printf("Error from consumer: %v\n", err)
+		}
+		if ctx.Err() != nil {
+			return
+		}
+	}
+}
+
+func (c *Consumer) claimMessage() error {
+	messages, err := c.sub.Fetch(1)
 	if err == nats.ErrTimeout {
 
 	} else if err != nil {
 		return err
 	}
 
-	for _, msg := range msgs {
-		if err := msg.Ack(); err != nil {
+	for _, message := range messages {
+		if err := message.Ack(); err != nil {
 			return err
 		}
-		log.Printf("Data: %s\n", string(msg.Data))
+		log.Printf("Data: %s\n", string(message.Data))
 	}
 	return nil
-}
-
-func (c *Consumer) Unsubscribe() {
-	if err := c.sub.Unsubscribe(); err != nil {
-		log.Println(err)
-	}
 }
