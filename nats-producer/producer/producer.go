@@ -3,14 +3,8 @@ package producer
 import (
 	"github.com/nats-io/nats.go"
 	"log"
-)
-
-const (
-	URL         = "jupyterhub.brique.kr:4222"
-	subjectName = "TEST.NATS"
-
-	User = "myuser"
-	Pass = "mypass"
+	"nats-producer/config"
+	"strings"
 )
 
 type Producer struct {
@@ -18,18 +12,25 @@ type Producer struct {
 	js nats.JetStreamContext
 }
 
-func NewProducer() (*Producer, error) {
-	nc, err := nats.Connect(URL, nats.UserInfo(User, Pass))
+var Client *Producer
+
+func NewProducer(cfg config.Nats) error {
+	if Client != nil {
+		return nil
+	}
+
+	nc, err := nats.Connect(strings.Join(cfg.Servers, ","), nats.UserInfo(cfg.Username, cfg.Password))
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	js, err := nc.JetStream()
 	if err != nil {
-		return nil, err
+		return err
 	}
 
-	return &Producer{nc: nc, js: js}, nil
+	Client = &Producer{nc: nc, js: js}
+	return nil
 }
 
 func (p *Producer) Close() {
@@ -56,8 +57,8 @@ func (p *Producer) CreateStream(streamName string) error {
 	return nil
 }
 
-func (p *Producer) SendMessage() error {
-	pub, err := p.js.Publish(subjectName, []byte("hello"))
+func (p *Producer) SendMessage(subject string, message []byte) error {
+	pub, err := p.js.Publish(subject, message)
 	if err != nil {
 		return err
 	}
