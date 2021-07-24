@@ -7,6 +7,7 @@ import (
 	"nats-consumer/consumer"
 	"os"
 	"os/signal"
+	"sync"
 	"syscall"
 )
 
@@ -27,10 +28,16 @@ func main() {
 	defer consumer.Client.Close()
 
 	ctx, cancel := context.WithCancel(context.Background())
-	go consumer.Client.ListenMessage(ctx)
+	wg := sync.WaitGroup{}
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		consumer.Client.ListenMessage(ctx)
+	}()
 	log.Println("Consumer up and running!...")
 
 	waitSignal(ctx, cancel)
+	wg.Wait()
 }
 
 func waitSignal(ctx context.Context, cancel context.CancelFunc) {
