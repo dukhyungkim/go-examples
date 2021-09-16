@@ -2,9 +2,9 @@ package main
 
 import (
 	"context"
+	"go-examples/nats-consumer/config"
+	"go-examples/nats-consumer/consumer"
 	"log"
-	"nats-consumer/config"
-	"nats-consumer/consumer"
 	"os"
 	"os/signal"
 	"sync"

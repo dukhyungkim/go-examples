@@ -1,9 +1,9 @@
 package main
 
 import (
+	"go-examples/nats-producer/config"
+	"go-examples/nats-producer/producer"
 	"log"
-	"nats-producer/config"
-	"nats-producer/producer"
 )
 
 func main() {
