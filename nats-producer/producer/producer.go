@@ -2,8 +2,8 @@ package producer
 
 import (
 	"github.com/nats-io/nats.go"
+	"go-examples/nats-producer/config"
 	"log"
-	"nats-producer/config"
 	"strings"
 )
 

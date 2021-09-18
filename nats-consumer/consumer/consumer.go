@@ -3,8 +3,8 @@ package consumer
 import (
 	"context"
 	"github.com/nats-io/nats.go"
+	"go-examples/nats-consumer/config"
 	"log"
-	"nats-consumer/config"
 	"strings"
 )
 
