@@ -5,7 +5,7 @@ import (
 )
 
 type Config struct {
-	Consumer Nats `yaml:"consumer"`
+	Nats *Nats `yaml:"nats"`
 }
 
 type Nats struct {

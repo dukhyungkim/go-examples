@@ -2,7 +2,7 @@ package producer
 
 import (
 	"github.com/nats-io/nats.go"
-	"go-examples/nats-producer/config"
+	"go-examples/common/config"
 	"log"
 	"strings"
 )
@@ -14,7 +14,7 @@ type Producer struct {
 
 var Client *Producer
 
-func NewProducer(cfg config.Nats) error {
+func NewProducer(cfg *config.Nats) error {
 	if Client != nil {
 		return nil
 	}

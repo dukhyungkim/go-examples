@@ -3,7 +3,7 @@ package consumer
 import (
 	"context"
 	"github.com/nats-io/nats.go"
-	"go-examples/nats-consumer/config"
+	"go-examples/common/config"
 	"log"
 	"strings"
 )
@@ -16,7 +16,7 @@ type Consumer struct {
 
 var Client *Consumer
 
-func NewConsumer(cfg config.Nats) error {
+func NewConsumer(cfg *config.Nats) error {
 	if Client != nil {
 		return nil
 	}

@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"go-examples/nats-consumer/config"
+	"go-examples/common/config"
 	"go-examples/nats-consumer/consumer"
 	"log"
 	"os"
@@ -22,7 +22,7 @@ func main() {
 		log.Fatalf("Cannot access config: %v\n", err)
 	}
 
-	if err := consumer.NewConsumer(cfg.Consumer); err != nil {
+	if err := consumer.NewConsumer(cfg.Nats); err != nil {
 		log.Fatalf("Cannot init consumer: %v\n", err)
 	}
 	defer consumer.Client.Close()
