@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"go-examples/common/config"
-	"go-examples/nats-consumer/consumer"
 	"log"
 	"os"
 	"os/signal"
@@ -22,17 +21,17 @@ func main() {
 		log.Fatalf("Cannot access config: %v\n", err)
 	}
 
-	if err := consumer.NewConsumer(cfg.Nats); err != nil {
+	if err := NewConsumer(cfg.Nats); err != nil {
 		log.Fatalf("Cannot init consumer: %v\n", err)
 	}
-	defer consumer.Client.Close()
+	defer Client.Close()
 
 	ctx, cancel := context.WithCancel(context.Background())
 	wg := sync.WaitGroup{}
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
-		consumer.Client.ListenMessage(ctx)
+		Client.ListenMessage(ctx)
 	}()
 	log.Println("Consumer up and running!...")
 

@@ -2,7 +2,6 @@ package main
 
 import (
 	"go-examples/common/config"
-	"go-examples/nats-producer/producer"
 	"log"
 )
 
@@ -17,17 +16,17 @@ func main() {
 		log.Fatalf("Cannot access config: %v\n", err)
 	}
 
-	if err := producer.NewProducer(cfg.Nats); err != nil {
+	if err := NewProducer(cfg.Nats); err != nil {
 		log.Fatalln(err)
 	}
-	defer producer.Client.Close()
+	defer Client.Close()
 
-	if err := producer.Client.CreateStream(cfg.Nats.Subject); err != nil {
+	if err := Client.CreateStream(cfg.Nats.Subject); err != nil {
 		log.Fatalln(err)
 	}
 
 	message := "hello"
-	if err := producer.Client.SendMessage(cfg.Nats.Subject, []byte(message)); err != nil {
+	if err := Client.SendMessage(cfg.Nats.Subject, []byte(message)); err != nil {
 		log.Fatalln(err)
 	}
 }
