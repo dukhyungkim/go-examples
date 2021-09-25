@@ -5,6 +5,7 @@ import (
 	"go-examples/common/config"
 	"log"
 	"strings"
+	"time"
 )
 
 const (
@@ -27,21 +28,12 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	sub, err := nc.Subscribe(subject, func(msg *nats.Msg) {
-		message := "Hello " + string(msg.Data)
-		if err := msg.Respond([]byte(message)); err != nil {
-			log.Fatalln(err)
-		}
-	})
+	req, err := nc.Request(subject, []byte("world"), time.Second)
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	if err := sub.Unsubscribe(); err != nil {
-		log.Fatalln(err)
-	}
+	log.Println(req.Data)
 
-	if err := nc.Drain(); err != nil {
-		log.Fatalln(err)
-	}
+	nc.Close()
 }
