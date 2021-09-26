@@ -3,8 +3,8 @@ module go-examples
 go 1.16
 
 require (
+	github.com/go-redis/redis/v8 v8.11.3
 	github.com/gofiber/fiber/v2 v2.18.0
-	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/ilyakaznacheev/cleanenv v1.2.5
 	github.com/jessevdk/go-flags v1.5.0
 	github.com/nats-io/nats-server/v2 v2.5.0 // indirect

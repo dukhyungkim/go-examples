@@ -5,7 +5,8 @@ import (
 )
 
 type Config struct {
-	Nats *Nats `yaml:"nats"`
+	Nats  *Nats  `yaml:"nats"`
+	Redis *Redis `yaml:"redis"`
 }
 
 type Nats struct {
@@ -14,6 +15,13 @@ type Nats struct {
 	Subject  string   `yaml:"subject"`
 	Username string   `yaml:"username"`
 	Password string   `yaml:"password"`
+}
+
+type Redis struct {
+	Server   string `yaml:"server"`
+	Username string `yaml:"username"`
+	Password string `yaml:"password"`
+	DB       int    `yaml:"db"`
 }
 
 func NewConfig(configPath string) (*Config, error) {
