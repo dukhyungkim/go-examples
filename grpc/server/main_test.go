@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"github.com/stretchr/testify/assert"
 	pb "go-examples/grpc/helloworld"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/test/bufconn"
@@ -59,8 +60,6 @@ func TestSayHello(t *testing.T) {
 		if err != nil {
 			t.Errorf("HelloTest(%v) got unexpected error", tt.name)
 		}
-		if resp.Message != tt.want {
-			t.Errorf("HelloText(%v)=%v, wanted %v", tt.name, resp.Message, tt.want)
-		}
+		assert.Equal(t, tt.want, resp.Message)
 	}
 }

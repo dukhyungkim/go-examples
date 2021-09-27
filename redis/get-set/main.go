@@ -27,24 +27,18 @@ func main() {
 		log.Fatalf("Cannot access config: %v\n", err)
 	}
 
-	rdb := redis.NewClient(&redis.Options{
-		Addr:     cfg.Redis.Server,
-		Username: cfg.Redis.Username,
-		Password: cfg.Redis.Password,
-		DB:       cfg.Redis.DB,
-	})
-
-	if err := rdb.Set(ctx, key, value, 0).Err(); err != nil {
+	cache := NewCache(cfg.Redis)
+	if err := cache.SetValue(key, value); err != nil {
 		log.Fatalln(err)
 	}
 
-	val, err := rdb.Get(ctx, key).Result()
+	val, err := cache.GetValue(key)
 	if err != nil {
 		log.Fatalln(err)
 	}
 	fmt.Println(key, val)
 
-	val2, err := rdb.Get(ctx, nonExistedKey).Result()
+	val2, err := cache.GetValue(nonExistedKey)
 	if err == redis.Nil {
 		fmt.Println("key2 does not exist")
 	} else if err != nil {
