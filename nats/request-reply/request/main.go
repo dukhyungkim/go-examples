@@ -33,7 +33,7 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	log.Println(req.Data)
+	log.Println(string(req.Data))
 
 	nc.Close()
 }

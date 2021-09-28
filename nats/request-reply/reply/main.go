@@ -5,6 +5,8 @@ import (
 	"go-examples/common/config"
 	"log"
 	"strings"
+	"sync"
+	"time"
 )
 
 const (
@@ -27,17 +29,25 @@ func main() {
 		log.Fatalln(err)
 	}
 
+	wg := sync.WaitGroup{}
+	wg.Add(1)
 	sub, err := nc.Subscribe(subject, func(msg *nats.Msg) {
+		defer wg.Done()
+		log.Printf("server got message: %s\n", string(msg.Data))
 		message := "Hello " + string(msg.Data)
 		if err := msg.Respond([]byte(message)); err != nil {
 			log.Fatalln(err)
 		}
+		log.Printf("server sent message: %s\n", message)
 	})
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	if err := sub.Unsubscribe(); err != nil {
+	wg.Wait()
+	time.Sleep(time.Second)
+
+	if err := sub.Drain(); err != nil {
 		log.Fatalln(err)
 	}
 
