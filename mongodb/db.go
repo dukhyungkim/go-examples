@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"go-examples/common/config"
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"log"
@@ -70,6 +71,27 @@ func (m *Mongo) SaveHuman(human *Human) error {
 	return nil
 }
 
-func (m *Mongo) FindHuman() {
+func (m *Mongo) FindHumanByName(name string) (*Human, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), defaultTimeout)
+	defer cancel()
 
+	filter := bson.M{"name": name}
+
+	var human Human
+	if err := m.database.Collection(humanCollection).FindOne(ctx, filter).Decode(&human); err != nil {
+		return nil, err
+	}
+	return &human, nil
+}
+
+func (m *Mongo) DeleteHumanByName(name string) error {
+	ctx, cancel := context.WithTimeout(context.Background(), defaultTimeout)
+	defer cancel()
+
+	filter := bson.M{"name": name}
+
+	if _, err := m.database.Collection(humanCollection).DeleteOne(ctx, filter); err != nil {
+		return err
+	}
+	return nil
 }
