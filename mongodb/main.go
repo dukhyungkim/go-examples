@@ -22,4 +22,24 @@ func main() {
 	}
 	defer mc.Close()
 
+	human := Human{
+		Name: "test",
+		Age:  123,
+	}
+	if err := mc.SaveHuman(&human); err != nil {
+		log.Fatalln(err)
+	}
+
+	found, err := mc.FindHumanByName(human.Name)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	if human.IsEqual(found) == false {
+		log.Println("not same")
+	}
+
+	if err := mc.DeleteHumanByName(human.Name); err != nil {
+		log.Fatalln(err)
+	}
 }
