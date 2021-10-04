@@ -2,14 +2,12 @@ package main
 
 import (
 	"context"
+	"fmt"
+	"go-examples/common/config"
 	pb "go-examples/grpc/helloworld"
 	"google.golang.org/grpc"
 	"log"
 	"net"
-)
-
-const (
-	port = ":50051"
 )
 
 type server struct {
@@ -22,7 +20,12 @@ func (s *server) SayHello(_ context.Context, in *pb.HelloRequest) (*pb.HelloRepl
 }
 
 func main() {
-	lis, err := net.Listen("tcp", port)
+	opts, err := config.ParseRPCFlags()
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", opts.Port))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
