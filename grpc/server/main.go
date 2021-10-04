@@ -20,7 +20,7 @@ func (s *server) SayHello(_ context.Context, in *pb.HelloRequest) (*pb.HelloRepl
 }
 
 func main() {
-	opts, err := config.ParseRPCFlags()
+	opts, err := config.ParseServerFlags()
 	if err != nil {
 		log.Fatalln(err)
 	}
