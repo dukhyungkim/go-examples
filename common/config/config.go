@@ -8,6 +8,7 @@ type Config struct {
 	Nats    *Nats    `yaml:"nats"`
 	Redis   *Redis   `yaml:"redis"`
 	MongoDB *MongoDB `yaml:"mongo_db"`
+	Etcd    *Etcd    `yaml:"etcd"`
 }
 
 type Nats struct {
@@ -31,6 +32,10 @@ type MongoDB struct {
 	Database string `yaml:"database"`
 	Username string `yaml:"username"`
 	Password string `yaml:"password"`
+}
+
+type Etcd struct {
+	Endpoints []string `yaml:"endpoints"`
 }
 
 func NewConfig(configPath string) (*Config, error) {
