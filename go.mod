@@ -4,6 +4,7 @@ go 1.16
 
 require (
 	github.com/alicebob/miniredis/v2 v2.15.1
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/go-redis/redis/v8 v8.11.3
 	github.com/gofiber/fiber/v2 v2.18.0
 	github.com/ilyakaznacheev/cleanenv v1.2.5
