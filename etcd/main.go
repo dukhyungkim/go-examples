@@ -28,7 +28,7 @@ func main() {
 	}
 	defer cli.Close()
 
-	_, err = cli.Put(context.TODO(), "foo", "bar")
+	_, err = cli.Put(context.TODO(), "/test/foo", "bar")
 	if err != nil {
 		log.Fatal(err)
 	}
