@@ -7,8 +7,8 @@ services:
     volumes:
       - ./data:/etcd-data
     ports:
-      - 2379:2379
-      - 2380:2380
+      - "2379:2379"
+      - "2380:2380"
     environment:
       ETCD_NAME: etcd-1
       ETCD_DATA_DIR: /etcd-data
@@ -24,4 +24,4 @@ services:
     container_name: etcdkeeper
     restart: always
     ports:
-      - 8080:8080
+      - "8080:8080"
