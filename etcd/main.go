@@ -22,6 +22,8 @@ func main() {
 	cli, err := clientv3.New(clientv3.Config{
 		Endpoints:   cfg.Etcd.Endpoints,
 		DialTimeout: 5 * time.Second,
+		Username:    cfg.Etcd.Username,
+		Password:    cfg.Etcd.Password,
 	})
 	if err != nil {
 		log.Fatal(err)

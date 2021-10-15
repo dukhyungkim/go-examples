@@ -36,6 +36,8 @@ type MongoDB struct {
 
 type Etcd struct {
 	Endpoints []string `yaml:"endpoints"`
+	Username  string   `yaml:"username"`
+	Password  string   `yaml:"password"`
 }
 
 func NewConfig(configPath string) (*Config, error) {
