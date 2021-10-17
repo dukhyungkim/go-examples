@@ -4,6 +4,7 @@ import "github.com/jessevdk/go-flags"
 
 type Options struct {
 	ConfigPath string `long:"config" default:"config.yml" description:"path to config file"`
+	Key        string `long:"key" description:"ssh key path"`
 }
 
 func ParseFlags() (*Options, error) {
