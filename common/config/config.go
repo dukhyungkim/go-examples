@@ -28,7 +28,7 @@ type Redis struct {
 
 type MongoDB struct {
 	Host     string `yaml:"host"`
-	Port     int    `yaml:"port"`
+	Port     int    `yaml:"port" mapstructure:"MONGO_PORT"`
 	Database string `yaml:"database"`
 	Username string `yaml:"username"`
 	Password string `yaml:"password"`
