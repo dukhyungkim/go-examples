@@ -5,6 +5,7 @@ import (
 	"github.com/spf13/viper"
 	"go-examples/common/config"
 	"log"
+	"strings"
 )
 
 func main() {
@@ -19,6 +20,7 @@ func main() {
 	for _, key := range viper.AllKeys() {
 		fmt.Printf("key: %s, val: %v\n", key, viper.Get(key))
 	}
+	log.Println("mongo-port", viper.GetString("mongodb.port"))
 }
 
 func readConfigFromFile(cfg *config.Config) {
@@ -26,10 +28,9 @@ func readConfigFromFile(cfg *config.Config) {
 	viper.SetConfigType("yaml")
 	viper.AddConfigPath(".")
 
-	viper.SetEnvPrefix("my")
+	viper.SetEnvPrefix("MY")
 	viper.AutomaticEnv()
-
-	log.Println("mongo-port", viper.GetInt("mongo.port"))
+	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
 
 	if err := viper.ReadInConfig(); err != nil {
 		panic(fmt.Errorf("fatal error config file: %w", err))
