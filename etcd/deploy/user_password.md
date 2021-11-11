@@ -29,7 +29,7 @@ etcdctl role del myrole
 ```
 etcdctl role grant-permission myrole read /config/
 etcdctl role grant-permission myrole write /config/
-etcdctl role grant-permission myrole --prefix true readwrite /config/
+etcdctl role grant-permission myrole --prefix=true readwrite /config/
 ```
 
 ## role 에 사용자 추가/삭제
