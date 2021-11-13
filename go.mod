@@ -4,6 +4,7 @@ go 1.16
 
 require (
 	github.com/alicebob/miniredis/v2 v2.15.1
+	github.com/cenkalti/backoff/v4 v4.1.2 // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/go-redis/redis/v8 v8.11.3
 	github.com/gofiber/fiber/v2 v2.18.0
@@ -11,8 +12,11 @@ require (
 	github.com/jessevdk/go-flags v1.5.0
 	github.com/nats-io/nats-server/v2 v2.5.0 // indirect
 	github.com/nats-io/nats.go v1.12.1
+	github.com/reactivex/rxgo/v2 v2.5.0
 	github.com/spf13/viper v1.9.0
+	github.com/stretchr/objx v0.3.0 // indirect
 	github.com/stretchr/testify v1.7.0
+	github.com/teivah/onecontext v1.3.0 // indirect
 	go.etcd.io/etcd/client/v3 v3.5.0
 	go.mongodb.org/mongo-driver v1.7.2
 	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519
