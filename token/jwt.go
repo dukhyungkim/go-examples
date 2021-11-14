@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"github.com/dgrijalva/jwt-go"
 	"time"
@@ -40,6 +41,17 @@ func (maker *JWTMaker) VerifyToken(token string) (*Payload, error) {
 
 	jwtToken, err := jwt.ParseWithClaims(token, &Payload{}, keyFunc)
 	if err != nil {
-		return nil, err
+		verr, ok := err.(*jwt.ValidationError)
+		if ok && errors.Is(verr.Inner, ErrExpiredToken) {
+			return nil, ErrExpiredToken
+		}
+		return nil, ErrInvalidToken
 	}
+
+	payload, ok := jwtToken.Claims.(*Payload)
+	if !ok {
+		return nil, ErrInvalidToken
+	}
+
+	return payload, nil
 }

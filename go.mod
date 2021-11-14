@@ -8,6 +8,7 @@ require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/go-redis/redis/v8 v8.11.3
 	github.com/gofiber/fiber/v2 v2.18.0
+	github.com/google/uuid v1.3.0
 	github.com/ilyakaznacheev/cleanenv v1.2.5
 	github.com/jessevdk/go-flags v1.5.0
 	github.com/nats-io/nats-server/v2 v2.5.0 // indirect
