@@ -9,6 +9,8 @@ require (
 	github.com/go-redis/redis/v8 v8.11.3
 	github.com/gofiber/fiber/v2 v2.18.0
 	github.com/google/uuid v1.3.0
+	github.com/grpc-ecosystem/grpc-gateway v1.16.0
+	github.com/grpc-ecosystem/grpc-gateway/v2 v2.6.0
 	github.com/ilyakaznacheev/cleanenv v1.2.5
 	github.com/jessevdk/go-flags v1.5.0
 	github.com/nats-io/nats-server/v2 v2.5.0 // indirect
@@ -23,6 +25,7 @@ require (
 	go.mongodb.org/mongo-driver v1.7.2
 	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519
 	golang.org/x/term v0.0.0-20210927222741-03fcf44c2211
+	google.golang.org/genproto v0.0.0-20211112145013-271947fe86fd
 	google.golang.org/grpc v1.40.0
 	google.golang.org/protobuf v1.27.1
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b
