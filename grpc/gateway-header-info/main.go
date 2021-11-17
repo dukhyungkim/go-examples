@@ -2,6 +2,8 @@ package main
 
 import (
 	"context"
+	"fmt"
+	"google.golang.org/grpc/metadata"
 	"log"
 	"net"
 	"net/http"
@@ -20,7 +22,12 @@ func NewServer() *server {
 	return &server{}
 }
 
-func (s *server) SayHello(_ context.Context, in *helloworldpb.HelloRequest) (*helloworldpb.HelloReply, error) {
+func (s *server) SayHello(ctx context.Context, in *helloworldpb.HelloRequest) (*helloworldpb.HelloReply, error) {
+	md, ok := metadata.FromIncomingContext(ctx)
+	if !ok {
+		return nil, fmt.Errorf("failed to get metadata from incoming context")
+	}
+	log.Println("Authorization:", md.Get("Authorization"))
 	return &helloworldpb.HelloReply{Message: in.Name + " world"}, nil
 }
 
