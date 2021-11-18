@@ -8,6 +8,7 @@ import (
 	"log"
 	"net"
 	"net/http"
+	"strings"
 
 	"github.com/grpc-ecosystem/go-grpc-middleware"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
@@ -30,13 +31,20 @@ func (s *server) SayHello(ctx context.Context, in *helloworldpb.HelloRequest) (*
 }
 
 func myAuthFunc(ctx context.Context) (context.Context, error) {
+	method, ok := grpc.Method(ctx)
+	if !ok {
+		return nil, status.Error(codes.InvalidArgument, "method not ok")
+	}
+	log.Println("method:", method)
+	log.Println("is SayHello?:", strings.Contains(method, "SayHello"))
+
 	token, err := grpc_auth.AuthFromMD(ctx, "bearer")
 	if err != nil {
 		return nil, err
 	}
 
 	if token != "my-token" {
-		return nil, status.Errorf(codes.Unauthenticated, "token is invalid")
+		return nil, status.Error(codes.Unauthenticated, "token is invalid")
 	}
 
 	newCtx := context.WithValue(ctx, "token", token)
