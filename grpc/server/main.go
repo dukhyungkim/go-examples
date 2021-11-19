@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"go-examples/common/config"
-	pb "go-examples/grpc/helloworld"
+	pb "go-examples/proto/helloworld"
 	"google.golang.org/grpc"
 	"log"
 	"net"
