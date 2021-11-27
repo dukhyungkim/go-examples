@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"github.com/stretchr/testify/assert"
-	pb "go-examples/grpc/helloworld"
+	pb "go-examples/proto/helloworld"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/test/bufconn"
 	"log"
