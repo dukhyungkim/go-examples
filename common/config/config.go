@@ -7,6 +7,7 @@ import (
 type Config struct {
 	Nats    *Nats    `yaml:"nats"`
 	Redis   *Redis   `yaml:"redis"`
+	RDB     *RDB     `yaml:"rdb"`
 	MongoDB *MongoDB `yaml:"mongo_db"`
 	Etcd    *Etcd    `yaml:"etcd"`
 }
@@ -17,6 +18,14 @@ type Nats struct {
 	Subject  string   `yaml:"subject"`
 	Username string   `yaml:"username"`
 	Password string   `yaml:"password"`
+}
+
+type RDB struct {
+	Host     string `yaml:"host"`
+	Port     int    `yaml:"port"`
+	Database string `yaml:"database"`
+	Username string `yaml:"username"`
+	Password string `yaml:"password"`
 }
 
 type Redis struct {

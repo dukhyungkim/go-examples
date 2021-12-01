@@ -3,6 +3,7 @@ module go-examples
 go 1.16
 
 require (
+	github.com/DATA-DOG/go-sqlmock v1.5.0
 	github.com/alicebob/miniredis/v2 v2.15.1
 	github.com/cenkalti/backoff/v4 v4.1.2 // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
