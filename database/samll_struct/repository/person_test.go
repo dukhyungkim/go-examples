@@ -83,28 +83,19 @@ func Test_personRepository_CreatePerson(t *testing.T) {
 		wantErr error
 	}{
 		{
-			"add new user",
-			args{person: &person},
-			1,
-			nil,
+			name:    "add new user",
+			args:    args{person: &person},
+			want:    1,
+			wantErr: nil,
 		},
 	}
 
-	const sqlInsert = `
-					INSERT INTO "person" ("name","age","address","phone") 
-						VALUES ($1,$2,$3,$4)`
-	const newId = 1
-	mock.ExpectBegin() // start transaction
-	//mock.ExpectExec(regexp.QuoteMeta(sqlInsert)).
-	mock.ExpectExec("INSERT INTO `person`").
+	const insertQuery = "INSERT INTO `person`"
+	mock.ExpectBegin()
+	mock.ExpectExec(insertQuery).
 		WithArgs(AnyTime{}, AnyTime{}, nil, person.Name, person.Age, person.Address, person.Phone).
 		WillReturnResult(sqlmock.NewResult(0, 1))
-	mock.ExpectCommit() // commit transaction
-
-	// we make sure that all expectations were met
-	//if err := mock.ExpectationsWereMet(); err != nil {
-	//	t.Errorf("there were unfulfilled expectations: %s", err)
-	//}
+	mock.ExpectCommit()
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
