@@ -24,12 +24,14 @@ require (
 	github.com/teivah/onecontext v1.3.0 // indirect
 	go.etcd.io/etcd/client/v3 v3.5.0
 	go.mongodb.org/mongo-driver v1.7.2
-	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519
+	golang.org/x/crypto v0.0.0-20211117183948-ae814b36b871
 	golang.org/x/term v0.0.0-20210927222741-03fcf44c2211
 	google.golang.org/genproto v0.0.0-20211112145013-271947fe86fd
 	google.golang.org/grpc v1.40.0
 	google.golang.org/protobuf v1.27.1
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b
-	gorm.io/driver/mysql v1.2.0
-	gorm.io/gorm v1.22.3
+	gorm.io/datatypes v1.0.4
+	gorm.io/driver/mysql v1.2.1
+	gorm.io/driver/postgres v1.2.3
+	gorm.io/gorm v1.22.4
 )
