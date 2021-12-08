@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CORS test</title>
+</head>
+<body>
+<h1>CORS Test</h1>
+
+<p>Call http://localhost:8090/v1/example/echo</p>
+
+<script type="text/javascript">
+    let hello = {
+        name: 'hello'
+    }
+
+    window.onload = function () {
+        sayHello(hello)
+    };
+
+    function sayHello(reqBody) {
+        const apiUrl = 'http://localhost:8090/v1/example/echo';
+        fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(reqBody)
+        })
+            .then(resp => resp.json()).then(data => document.getElementById('res').innerHTML = data["message"])
+            .catch(err => document.getElementById('res').innerHTML = err)
+    }
+</script>
+
+<h4>Response: </h4>
+<p id="res"></p>
+</body>
+</html>
