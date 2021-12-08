@@ -9,6 +9,7 @@ type ServerOptions struct {
 type ClientOptions struct {
 	Target string `long:"target" short:"t" default:"localhost:50051" description:"target rpc server address"`
 	Name   string `long:"name" short:"n" default:"world" description:"sending name"`
+	Cert   string `long:"cert" default:"" description:"certification path"`
 }
 
 func ParseServerFlags() (*ServerOptions, error) {
