@@ -1,15 +1,20 @@
 package entity
 
-import "gorm.io/gorm"
+import (
+	"gorm.io/datatypes"
+	"time"
+)
 
 type Person struct {
-	gorm.Model
-	Name    string `gorm:"size:24"`
-	Age     int
-	Address string
-	Phone   string
+	ID          uint
+	Age         uint8
+	Address     string `gorm:"size:64"`
+	Phone       string `gorm:"size:16"`
+	Information datatypes.JSON
+	CreatedAt   time.Time `gorm:"autoCreateTime:milli"`
+	UpdatedAt   time.Time `gorm:"autoUpdateTime:milli"`
 }
 
 func (Person) TableName() string {
-	return "person"
+	return "persons"
 }
