@@ -521,6 +521,8 @@ github.com/gogo/protobuf v1.2.1/go.mod h1:hp+jE20tsWTFYpLwKvXlhS1hjn+gTNwPg2I6zV
 github.com/gogo/protobuf v1.3.1/go.mod h1:SlYgWuQ5SjCEi6WLHjHCa1yvBfUnHcTbrrZtXPKa29o=
 github.com/gogo/protobuf v1.3.2 h1:Ov1cvc58UF3b5XjBnZv7+opcTcQFZebYjWzi34vdm4Q=
 github.com/gogo/protobuf v1.3.2/go.mod h1:P1XiOD3dCwIKUDQYPy72D8LYyHL2YPYrpS2s69NZV8Q=
+github.com/goharbor/go-client v0.24.3 h1:0m/lop01ygsqi2KlCyjZMou02+w/s8Uj/JTkbI1MHoE=
+github.com/goharbor/go-client v0.24.3/go.mod h1:e8YCI6AKeRu8DjSyIXyAUCsUiiDCagnVE7GoW1S3o8I=
 github.com/goharbor/harbor/src v0.0.0-20211025104526-d4affc2eba6d h1:/ZsWt+7vAimZd7g0P7JMoy5gc/QO6qf6HV2cPsGPHCU=
 github.com/goharbor/harbor/src v0.0.0-20211025104526-d4affc2eba6d/go.mod h1:5WKePD4Y8lsPoD5xQy887gFC97EC6vNbJVBcbva/8ws=
 github.com/goji/httpauth v0.0.0-20160601135302-2da839ab0f4d/go.mod h1:nnjvkQ9ptGaCkuDUx6wNykzzlUixGxvkme+H/lnzb+A=

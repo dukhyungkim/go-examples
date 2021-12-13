@@ -10,6 +10,7 @@ type Config struct {
 	RDB     *RDB     `yaml:"rdb"`
 	MongoDB *MongoDB `yaml:"mongo_db"`
 	Etcd    *Etcd    `yaml:"etcd"`
+	Harbor  *Harbor  `yaml:"harbor"`
 }
 
 type Nats struct {
@@ -47,6 +48,12 @@ type Etcd struct {
 	Endpoints []string `yaml:"endpoints"`
 	Username  string   `yaml:"username"`
 	Password  string   `yaml:"password"`
+}
+
+type Harbor struct {
+	APIHost  string `yaml:"api_host"`
+	Username string `yaml:"username"`
+	Password string `yaml:"password"`
 }
 
 func NewConfig(configPath string) (*Config, error) {

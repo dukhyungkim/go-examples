@@ -3,21 +3,27 @@ package main
 import (
 	"context"
 	"github.com/mittwald/goharbor-client/v5/apiv2"
+	"go-examples/common/config"
 	"log"
 )
 
 func main() {
-	const (
-		apiURL   = "https://domain/api"
-		username = "user"
-		password = "pass"
-	)
-	harborClient, err := apiv2.NewRESTClientForHost(apiURL, username, password, nil)
+	opts, err := config.ParseFlags()
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	cfg, err := config.NewConfig(opts.ConfigPath)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	harborClient, err := apiv2.NewRESTClientForHost(cfg.Harbor.APIHost, cfg.Harbor.Username, cfg.Harbor.Password, nil)
 	if err != nil {
 		panic(err)
 	}
 
-	projects, err := harborClient.ListProjects(context.Background(), "")
+	projects, err := harborClient.ListProjects(context.Background(), "qps")
 	if err != nil {
 		panic(err)
 	}
