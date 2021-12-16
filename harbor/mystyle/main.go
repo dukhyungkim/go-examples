@@ -2,6 +2,7 @@ package main
 
 import (
 	"go-examples/common/config"
+	"go-examples/harbor/mystyle/harbor"
 	"log"
 )
 
@@ -16,7 +17,7 @@ func main() {
 		log.Println(err)
 	}
 
-	hc := NewHarborClient(&HarborConfig{
+	hc := harbor.NewHarborClient(&harbor.HarborConfig{
 		URL:      cfg.Harbor.APIHost,
 		Username: cfg.Harbor.Username,
 		Password: cfg.Harbor.Password,

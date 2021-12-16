@@ -1,10 +1,10 @@
-package main
+package harbor
 
 import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
-	"go-examples/harbor/mystyle/model"
+	"go-examples/harbor/mystyle/harbor/model"
 	"io/ioutil"
 	"log"
 	"net/http"
