@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"go-examples/common/config"
 	"go-examples/harbor/mystyle/harbor"
 	"log"
@@ -28,6 +29,7 @@ func main() {
 		panic(err)
 	}
 	log.Println(pong)
+	fmt.Println()
 
 	projects, err := hc.ListProjects()
 	if err != nil {
@@ -37,5 +39,15 @@ func main() {
 	for _, project := range projects {
 		log.Printf("%+v\n", *project)
 	}
+	fmt.Println()
 
+	repositories, err := hc.ListRepositories(projects[0].Name)
+	if err != nil {
+		panic(err)
+	}
+
+	for _, repository := range repositories {
+		log.Printf("%+v\n", *repository)
+	}
+	fmt.Println()
 }

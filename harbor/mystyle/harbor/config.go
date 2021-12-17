@@ -1,8 +1,9 @@
 package harbor
 
 const (
-	urlProjects = "/projects"
-	urlPing     = "/ping"
+	urlProjects     = "/projects"
+	urlPing         = "/ping"
+	urlRepositories = "/projects/%s/repositories"
 )
 
 type HarborConfig struct {
