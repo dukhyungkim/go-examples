@@ -9,12 +9,12 @@ import (
 func main() {
 	opts, err := config.ParseFlags()
 	if err != nil {
-		log.Println(err)
+		panic(err)
 	}
 
 	cfg, err := config.NewConfig(opts.ConfigPath)
 	if err != nil {
-		log.Println(err)
+		panic(err)
 	}
 
 	hc := harbor.NewHarborClient(&harbor.HarborConfig{
@@ -23,8 +23,19 @@ func main() {
 		Password: cfg.Harbor.Password,
 	})
 
-	err = hc.ListProjects()
+	pong, err := hc.Ping()
 	if err != nil {
-		log.Println(err)
+		panic(err)
 	}
+	log.Println(pong)
+
+	projects, err := hc.ListProjects()
+	if err != nil {
+		panic(err)
+	}
+
+	for _, project := range projects {
+		log.Printf("%+v\n", *project)
+	}
+
 }
