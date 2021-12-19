@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"go-examples/common/config"
 	"go-examples/harbor/mystyle/harbor"
-	"log"
+	"strings"
 )
 
 func main() {
@@ -28,7 +28,9 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	log.Println(pong)
+
+	fmt.Println("--- Ping ---")
+	fmt.Println(pong)
 	fmt.Println()
 
 	projects, err := hc.ListProjects()
@@ -36,8 +38,9 @@ func main() {
 		panic(err)
 	}
 
+	fmt.Println("--- Projects ---")
 	for _, project := range projects {
-		log.Printf("%+v\n", *project)
+		fmt.Printf("%+v\n", *project)
 	}
 	fmt.Println()
 
@@ -46,8 +49,20 @@ func main() {
 		panic(err)
 	}
 
+	fmt.Println("--- Repositories ---")
 	for _, repository := range repositories {
-		log.Printf("%+v\n", *repository)
+		fmt.Printf("%+v\n", *repository)
+	}
+	fmt.Println()
+
+	artifacts, err := hc.ListArtifacts(projects[0].Name, strings.Split(repositories[0].Name, "/")[1])
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println("--- Artifacts ---")
+	for _, artifact := range artifacts {
+		fmt.Printf("%+v\n", *artifact)
 	}
 	fmt.Println()
 }

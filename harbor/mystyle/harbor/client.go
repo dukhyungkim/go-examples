@@ -2,7 +2,9 @@ package harbor
 
 import (
 	"encoding/base64"
+	"encoding/json"
 	"fmt"
+	"go-examples/harbor/mystyle/harbor/model"
 	"io"
 	"io/ioutil"
 	"log"
@@ -63,6 +65,14 @@ func (c *harborClient) doRequest(req *http.Request) ([]byte, error) {
 	respData, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
+	}
+
+	if resp.StatusCode != 200 {
+		var errors []*model.Error
+		if err := json.Unmarshal(respData, &errors); err != nil {
+			return nil, err
+		}
+		return nil, nil
 	}
 
 	return respData, nil
