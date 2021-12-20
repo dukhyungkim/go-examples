@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"go-examples/common/config"
 	"go-examples/harbor/mystyle/harbor"
+	"go-examples/harbor/mystyle/harbor/model"
 	"strings"
 )
 
@@ -33,7 +34,8 @@ func main() {
 	fmt.Println(pong)
 	fmt.Println()
 
-	projects, err := hc.ListProjects()
+	listProjectsParams := model.NewListProjectsParams()
+	projects, err := hc.ListProjects(listProjectsParams)
 	if err != nil {
 		panic(err)
 	}
