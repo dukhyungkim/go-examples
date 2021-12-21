@@ -7,6 +7,6 @@ import (
 type HarborClient interface {
 	ListProjects(params *model.ListProjectParams) ([]*model.Project, error)
 	Ping() (string, error)
-	ListRepositories(projectName string) ([]*model.Repository, error)
+	ListRepositories(projectName string, params *model.ListRepositoriesParams) ([]*model.Repository, error)
 	ListArtifacts(projectName string, repositoryName string) ([]*model.Artifact, error)
 }

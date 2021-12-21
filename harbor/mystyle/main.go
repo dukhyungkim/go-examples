@@ -46,7 +46,8 @@ func main() {
 	}
 	fmt.Println()
 
-	repositories, err := hc.ListRepositories(projects[0].Name)
+	listRepositoriesParams := model.NewListRepositoriesParams()
+	repositories, err := hc.ListRepositories(projects[0].Name, listRepositoriesParams)
 	if err != nil {
 		panic(err)
 	}
