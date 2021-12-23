@@ -46,8 +46,10 @@ func main() {
 	}
 	fmt.Println()
 
+	projectName := projects[0].Name
+
 	listRepositoriesParams := model.NewListRepositoriesParams()
-	repositories, err := hc.ListRepositories(projects[0].Name, listRepositoriesParams)
+	repositories, err := hc.ListRepositories(projectName, listRepositoriesParams)
 	if err != nil {
 		panic(err)
 	}
@@ -58,7 +60,10 @@ func main() {
 	}
 	fmt.Println()
 
-	artifacts, err := hc.ListArtifacts(projects[0].Name, strings.Split(repositories[0].Name, "/")[1])
+	repositoryName := strings.Split(repositories[0].Name, "/")[1]
+
+	listArtifactsParams := model.NewListArtifactsParams()
+	artifacts, err := hc.ListArtifacts(projectName, repositoryName, listArtifactsParams)
 	if err != nil {
 		panic(err)
 	}

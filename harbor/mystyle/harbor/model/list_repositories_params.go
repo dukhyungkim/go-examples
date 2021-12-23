@@ -14,8 +14,6 @@ type ListRepositoriesParams struct {
 
 func NewListRepositoriesParams() *ListRepositoriesParams {
 	return &ListRepositoriesParams{
-		Query:    "",
-		Sort:     "",
 		Page:     1,
 		PageSize: 10,
 	}

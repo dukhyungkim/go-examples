@@ -18,13 +18,8 @@ type ListProjectParams struct {
 
 func NewListProjectsParams() *ListProjectParams {
 	return &ListProjectParams{
-		Query:      "",
 		Page:       1,
 		PageSize:   10,
-		Sort:       "",
-		Name:       "",
-		Public:     false,
-		Owner:      "",
 		WithDetail: true,
 	}
 }

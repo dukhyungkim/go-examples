@@ -6,8 +6,13 @@ import (
 	"go-examples/harbor/mystyle/harbor/model"
 )
 
-func (c *harborClient) ListArtifacts(projectName string, repositoryName string) ([]*model.Artifact, error) {
-	data, err := c.getJson(fmt.Sprintf(urlArtifacts, projectName, repositoryName), true)
+func (c *harborClient) ListArtifacts(projectName string, repositoryName string, params *model.ListArtifactsParams) ([]*model.Artifact, error) {
+	if params == nil {
+		params = model.NewListArtifactsParams()
+	}
+
+	url := fmt.Sprintf(urlArtifacts, projectName, repositoryName) + params.ToParamString()
+	data, err := c.getJson(url, true)
 	if err != nil {
 		return nil, err
 	}
