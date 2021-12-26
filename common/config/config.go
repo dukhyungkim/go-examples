@@ -27,6 +27,7 @@ type RDB struct {
 	Database string `yaml:"database"`
 	Username string `yaml:"username"`
 	Password string `yaml:"password"`
+	TimeZone string `yaml:"time_zone"`
 }
 
 type Redis struct {
