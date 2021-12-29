@@ -25,7 +25,7 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", opts.Port))
+	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", opts.GRPCPort))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}

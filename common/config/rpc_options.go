@@ -3,11 +3,12 @@ package config
 import "github.com/jessevdk/go-flags"
 
 type ServerOptions struct {
-	Port int `long:"port" short:"p" default:"50051" description:"rpc server pot"`
+	GRPCPort int `long:"grpc" default:"8000" description:"grpc server pot"`
+	HTTPPort int `long:"http" default:"9000" description:"grpc-gateway server pot"`
 }
 
 type ClientOptions struct {
-	Target string `long:"target" short:"t" default:"localhost:50051" description:"target rpc server address"`
+	Target string `long:"target" short:"t" default:"localhost:8000" description:"target rpc server address"`
 	Name   string `long:"name" short:"n" default:"world" description:"sending name"`
 	Cert   string `long:"cert" default:"" description:"certification path"`
 }

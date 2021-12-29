@@ -1,4 +1,4 @@
-TARGET_DIR = helloworld
+TARGET_DIR = order
 
 build: $(TARGET_DIR)
 	protoc --lint_out=. $(TARGET_DIR)/*.proto

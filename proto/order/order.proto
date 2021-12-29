@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package order;
+
+option go_package = "go-examaples/order";
+
+import "google/protobuf/struct.proto";
+import "google/api/annotations.proto";
+
+service OrderService {
+  rpc SayOrder (OrderRequest) returns (OrderReply) {
+    option (google.api.http) = {
+      post: "/v1/order/echo"
+      body: "*"
+    };
+  }
+}
+
+message OrderRequest {
+  string name = 1;
+  google.protobuf.Struct context = 2;
+  int32 age = 3;
+}
+
+message OrderReply {
+  string name = 1;
+  google.protobuf.Struct context = 2;
+  int32 age = 3;
+}
