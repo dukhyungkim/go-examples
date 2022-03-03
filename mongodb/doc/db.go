@@ -42,7 +42,7 @@ func NewMongo(cfg *config.MongoDB) (*Mongo, error) {
 
 	pingCtx, pingCancel := context.WithTimeout(context.Background(), defaultTimeout)
 	defer pingCancel()
-	if err := client.Ping(pingCtx, nil); err != nil {
+	if err = client.Ping(pingCtx, nil); err != nil {
 		return nil, fmt.Errorf("failed to ping db; %w", err)
 	}
 

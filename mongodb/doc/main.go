@@ -26,7 +26,7 @@ func main() {
 		Name: "test",
 		Age:  123,
 	}
-	if err := mc.SaveHuman(&human); err != nil {
+	if err = mc.SaveHuman(&human); err != nil {
 		log.Fatalln(err)
 	}
 
@@ -39,7 +39,7 @@ func main() {
 		log.Println("not same")
 	}
 
-	if err := mc.DeleteHumanByName(human.Name); err != nil {
+	if err = mc.DeleteHumanByName(human.Name); err != nil {
 		log.Fatalln(err)
 	}
 }
