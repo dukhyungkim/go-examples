@@ -20,6 +20,7 @@ type Mongo struct {
 
 const (
 	defaultTimeout = 5 * time.Second
+	bucketName     = "people"
 )
 
 func NewMongo(cfg *config.MongoDB) (*Mongo, error) {
@@ -52,12 +53,13 @@ func NewMongo(cfg *config.MongoDB) (*Mongo, error) {
 }
 
 func (m *Mongo) UploadPerson(p *Person) error {
-	bucket, err := gridfs.NewBucket(m.database)
+	opts := &options.BucketOptions{}
+	bucket, err := gridfs.NewBucket(m.database, opts.SetName(bucketName))
 	if err != nil {
 		return err
 	}
 
-	uploadStream, err := bucket.OpenUploadStream("people")
+	uploadStream, err := bucket.OpenUploadStream(p.LastName)
 	if err != nil {
 		return err
 	}
@@ -79,7 +81,7 @@ func (m *Mongo) UploadPerson(p *Person) error {
 func (m *Mongo) DownloadPeople() ([]*Person, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
-	people := m.database.Collection("fs.files")
+	people := m.database.Collection(bucketName)
 	cursor, err := people.Find(ctx, bson.M{})
 	if err != nil {
 		return nil, err
