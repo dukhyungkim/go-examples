@@ -9,7 +9,7 @@ import (
 )
 
 type server struct {
-	pb.StreamServiceServer
+	pb.UnimplementedStreamServiceServer
 }
 
 func (s *server) FetchResponse(req *pb.Request, srv pb.StreamService_FetchResponseServer) error {

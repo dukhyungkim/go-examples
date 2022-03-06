@@ -1,0 +1,21 @@
+<html>
+<script>
+  async function test() {
+    const response = await fetch("http://localhost:8090/v1/stream/1")
+    const reader = response.body
+      .pipeThrough(new TextDecoderStream())
+      .getReader();
+    
+    while (true) {
+      const {value, done} = await reader.read();
+      if (done) break;
+      v = JSON.parse(value)
+      console.log('Recieved:', v.result)
+    }
+    console.log('Response done');
+  }
+
+  test()
+  
+</script>
+</html>
