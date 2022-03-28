@@ -1,8 +1,9 @@
 package entity
 
 import (
-	"gorm.io/datatypes"
 	"time"
+
+	"gorm.io/datatypes"
 )
 
 type Person struct {

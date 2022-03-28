@@ -3,10 +3,11 @@ package repository
 import (
 	"fmt"
 	"go-examples/common/config"
+	"net/url"
+
 	"gorm.io/driver/mysql"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-	"net/url"
 )
 
 func NewMariaDB(rdb *config.RDB) (*Storage, error) {

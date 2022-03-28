@@ -2,10 +2,11 @@ package main
 
 import (
 	"context"
-	"github.com/rs/cors"
 	"log"
 	"net"
 	"net/http"
+
+	"github.com/rs/cors"
 
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"google.golang.org/grpc"

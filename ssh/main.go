@@ -2,12 +2,13 @@ package main
 
 import (
 	"fmt"
-	"golang.org/x/crypto/ssh"
-	"golang.org/x/term"
 	"io/ioutil"
 	"log"
 	"strings"
 	"syscall"
+
+	"golang.org/x/crypto/ssh"
+	"golang.org/x/term"
 )
 
 func main() {

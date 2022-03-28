@@ -5,9 +5,10 @@ import (
 	"fmt"
 	"go-examples/common/config"
 	pb "go-examples/proto/helloworld"
-	"google.golang.org/grpc"
 	"log"
 	"net"
+
+	"google.golang.org/grpc"
 )
 
 type server struct {

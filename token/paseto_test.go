@@ -1,10 +1,11 @@
 package main
 
 import (
-	"github.com/stretchr/testify/require"
 	"go-examples/util"
 	"testing"
 	"time"
+
+	"github.com/stretchr/testify/require"
 )
 
 func TestPasetoMaker(t *testing.T) {

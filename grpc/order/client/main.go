@@ -7,13 +7,14 @@ import (
 	"fmt"
 	"go-examples/common/config"
 	pb "go-examples/proto/order"
+	"io/ioutil"
+	"log"
+	"time"
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/types/known/structpb"
-	"io/ioutil"
-	"log"
-	"time"
 )
 
 const jsonData = `{

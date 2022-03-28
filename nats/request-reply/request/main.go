@@ -1,11 +1,12 @@
 package main
 
 import (
-	"github.com/nats-io/nats.go"
 	"go-examples/common/config"
 	"log"
 	"strings"
 	"time"
+
+	"github.com/nats-io/nats.go"
 )
 
 const (

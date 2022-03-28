@@ -2,13 +2,14 @@ package main
 
 import (
 	"context"
-	"github.com/stretchr/testify/assert"
 	pb "go-examples/proto/helloworld"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/test/bufconn"
 	"log"
 	"net"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/test/bufconn"
 )
 
 const bufSize = 1024 * 1024

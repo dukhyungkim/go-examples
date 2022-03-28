@@ -3,9 +3,10 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/go-redis/redis/v8"
 	"go-examples/common/config"
 	"log"
+
+	"github.com/go-redis/redis/v8"
 )
 
 const (

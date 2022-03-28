@@ -1,8 +1,9 @@
 package main
 
 import (
-	"golang.org/x/crypto/bcrypt"
 	"log"
+
+	"golang.org/x/crypto/bcrypt"
 )
 
 const originPassword = "my_secret_password"

@@ -2,14 +2,15 @@ package repository
 
 import (
 	"database/sql/driver"
-	"github.com/DATA-DOG/go-sqlmock"
-	"github.com/stretchr/testify/assert"
 	"go-examples/database/samll_struct/entity"
-	"gorm.io/driver/mysql"
-	"gorm.io/gorm"
 	"reflect"
 	"testing"
 	"time"
+
+	"github.com/DATA-DOG/go-sqlmock"
+	"github.com/stretchr/testify/assert"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 )
 
 type AnyTime struct {

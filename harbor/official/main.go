@@ -2,11 +2,12 @@ package main
 
 import (
 	"context"
+	"go-examples/common/config"
+	"log"
+
 	"github.com/goharbor/go-client/pkg/harbor"
 	"github.com/goharbor/go-client/pkg/sdk/v2.0/client/health"
 	"github.com/goharbor/go-client/pkg/sdk/v2.0/client/repository"
-	"go-examples/common/config"
-	"log"
 )
 
 func main() {

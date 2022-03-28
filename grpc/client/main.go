@@ -7,11 +7,12 @@ import (
 	"fmt"
 	"go-examples/common/config"
 	pb "go-examples/proto/helloworld"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials"
 	"io/ioutil"
 	"log"
 	"time"
+
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
 )
 
 func main() {

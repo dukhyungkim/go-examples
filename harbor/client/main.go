@@ -2,9 +2,10 @@ package main
 
 import (
 	"context"
-	"github.com/mittwald/goharbor-client/v5/apiv2"
 	"go-examples/common/config"
 	"log"
+
+	"github.com/mittwald/goharbor-client/v5/apiv2"
 )
 
 func main() {

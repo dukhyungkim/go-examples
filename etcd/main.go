@@ -3,9 +3,10 @@ package main
 import (
 	"context"
 	"go-examples/common/config"
-	"go.etcd.io/etcd/client/v3"
 	"log"
 	"time"
+
+	"go.etcd.io/etcd/client/v3"
 )
 
 func main() {

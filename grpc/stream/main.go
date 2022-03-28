@@ -3,17 +3,18 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
-	"github.com/rs/cors"
-	"github.com/tmc/grpc-websocket-proxy/wsproxy"
 	"go-examples/grpc/stream/pb"
-	"google.golang.org/grpc"
 	"log"
 	"net"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
+
+	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
+	"github.com/rs/cors"
+	"github.com/tmc/grpc-websocket-proxy/wsproxy"
+	"google.golang.org/grpc"
 )
 
 const (

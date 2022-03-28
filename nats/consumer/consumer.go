@@ -2,10 +2,11 @@ package main
 
 import (
 	"context"
-	"github.com/nats-io/nats.go"
 	"go-examples/common/config"
 	"log"
 	"strings"
+
+	"github.com/nats-io/nats.go"
 )
 
 type Consumer struct {

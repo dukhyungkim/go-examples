@@ -1,10 +1,11 @@
 package main
 
 import (
-	"gopkg.in/yaml.v3"
 	"io/ioutil"
 	"log"
 	"path/filepath"
+
+	"gopkg.in/yaml.v3"
 )
 
 func main() {

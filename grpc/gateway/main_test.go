@@ -3,18 +3,19 @@ package main
 import (
 	"bytes"
 	"context"
-	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
-	"github.com/stretchr/testify/assert"
 	pb "go-examples/proto/helloworld"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/test/bufconn"
-	"google.golang.org/protobuf/encoding/protojson"
 	"io/ioutil"
 	"log"
 	"net"
 	"net/http"
 	"testing"
 	"time"
+
+	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
+	"github.com/stretchr/testify/assert"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/test/bufconn"
+	"google.golang.org/protobuf/encoding/protojson"
 )
 
 const bufSize = 1024 * 1024

@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
-	"github.com/spf13/viper"
 	"go-examples/common/config"
 	"log"
 	"strings"
+
+	"github.com/spf13/viper"
 )
 
 func main() {

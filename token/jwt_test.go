@@ -1,11 +1,12 @@
 package main
 
 import (
-	"github.com/dgrijalva/jwt-go"
-	"github.com/stretchr/testify/require"
 	"go-examples/util"
 	"testing"
 	"time"
+
+	"github.com/dgrijalva/jwt-go"
+	"github.com/stretchr/testify/require"
 )
 
 func TestJWTMaker(t *testing.T) {

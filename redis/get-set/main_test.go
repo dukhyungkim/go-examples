@@ -1,10 +1,11 @@
 package main
 
 import (
-	"github.com/alicebob/miniredis/v2"
-	"github.com/stretchr/testify/assert"
 	"go-examples/common/config"
 	"testing"
+
+	"github.com/alicebob/miniredis/v2"
+	"github.com/stretchr/testify/assert"
 )
 
 var tests = []struct {

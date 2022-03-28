@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/go-redis/redis/v8"
 	"go-examples/common/config"
 	"time"
+
+	"github.com/go-redis/redis/v8"
 )
 
 type Cache struct {

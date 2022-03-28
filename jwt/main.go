@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/dgrijalva/jwt-go"
 	"log"
 	"time"
+
+	"github.com/dgrijalva/jwt-go"
 )
 
 const (

@@ -2,13 +2,14 @@ package main
 
 import (
 	"context"
-	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
-	"github.com/rs/cors"
 	pb "go-examples/grpc/server-side-event/sse"
-	"google.golang.org/grpc"
 	"log"
 	"net"
 	"net/http"
+
+	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
+	"github.com/rs/cors"
+	"google.golang.org/grpc"
 )
 
 func main() {

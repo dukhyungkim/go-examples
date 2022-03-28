@@ -1,10 +1,11 @@
 package main
 
 import (
-	"github.com/nats-io/nats.go"
 	"go-examples/common/config"
 	"log"
 	"strings"
+
+	"github.com/nats-io/nats.go"
 )
 
 type Producer struct {

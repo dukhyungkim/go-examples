@@ -3,10 +3,11 @@ package main
 import (
 	"context"
 	"fmt"
-	"google.golang.org/grpc/metadata"
 	"log"
 	"net"
 	"net/http"
+
+	"google.golang.org/grpc/metadata"
 
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"google.golang.org/grpc"
