@@ -6,6 +6,7 @@ require (
 	github.com/DATA-DOG/go-sqlmock v1.5.0
 	github.com/alicebob/miniredis/v2 v2.15.1
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
+	github.com/elastic/go-elasticsearch/v8 v8.1.0
 	github.com/go-redis/redis/v8 v8.11.3
 	github.com/gofiber/fiber/v2 v2.18.0
 	github.com/goharbor/go-client v0.24.3
@@ -54,6 +55,7 @@ require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/docker/distribution v2.7.1+incompatible // indirect
+	github.com/elastic/elastic-transport-go/v8 v8.1.0 // indirect
 	github.com/emirpasic/gods v1.12.0 // indirect
 	github.com/felixge/httpsnoop v1.0.2 // indirect
 	github.com/fsnotify/fsnotify v1.5.1 // indirect

@@ -5,12 +5,13 @@ import (
 )
 
 type Config struct {
-	Nats    *Nats    `yaml:"nats"`
-	Redis   *Redis   `yaml:"redis"`
-	RDB     *RDB     `yaml:"rdb"`
-	MongoDB *MongoDB `yaml:"mongo_db"`
-	Etcd    *Etcd    `yaml:"etcd"`
-	Harbor  *Harbor  `yaml:"harbor"`
+	Nats          *Nats          `yaml:"nats"`
+	Redis         *Redis         `yaml:"redis"`
+	RDB           *RDB           `yaml:"rdb"`
+	MongoDB       *MongoDB       `yaml:"mongo_db"`
+	Etcd          *Etcd          `yaml:"etcd"`
+	Harbor        *Harbor        `yaml:"harbor"`
+	Elasticsearch *Elasticsearch `yaml:"elasticsearch"`
 }
 
 type Nats struct {
@@ -43,6 +44,12 @@ type MongoDB struct {
 	Database string `yaml:"database"`
 	Username string `yaml:"username"`
 	Password string `yaml:"password"`
+}
+
+type Elasticsearch struct {
+	Addresses []string `yaml:"addresses"`
+	Username  string   `yaml:"username"`
+	Password  string   `yaml:"password"`
 }
 
 type Etcd struct {
