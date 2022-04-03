@@ -23,16 +23,16 @@ func main() {
 	client, err := elastic.NewClient(
 		elastic.SetURL(cfg.Elasticsearch.Addresses...),
 		elastic.SetBasicAuth(cfg.Elasticsearch.Username, cfg.Elasticsearch.Password),
+		elastic.SetSniff(false),
 	)
 	if err != nil {
 		log.Panicln(err)
 	}
 
-	infoResponse, err := client.NodesInfo().Do(ctx)
+	info, code, err := client.Ping(cfg.Elasticsearch.Addresses[0]).Do(ctx)
 	if err != nil {
 		log.Panicln(err)
 	}
-
-	log.Printf("ClusterName: %s\n", infoResponse.ClusterName)
-	log.Printf("Nodes: %#+v\n", infoResponse.Nodes)
+	log.Printf("ClusterName: %s\n", info.ClusterName)
+	log.Printf("Elasticsearch returned with code %d and version %s\n", code, info.Version.Number)
 }
