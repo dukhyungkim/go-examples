@@ -26,3 +26,11 @@ protoc -I ./proto \
    --grpc-gateway_out ./proto --grpc-gateway_opt paths=source_relative \
    ./proto/helloworld/*.proto
 ```
+
+## build swagger.json
+
+```
+protoc -I . -I ../../proto --openapiv2_out=. \
+  --openapiv2_opt=use_go_templates=true --openapiv2_opt=allow_merge=true \
+  --openapiv2_opt=omit_enum_default_value=true *.proto
+```
