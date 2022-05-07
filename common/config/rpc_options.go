@@ -3,8 +3,10 @@ package config
 import "github.com/jessevdk/go-flags"
 
 type ServerOptions struct {
-	GRPCPort int `long:"grpc" default:"8000" description:"grpc server pot"`
-	HTTPPort int `long:"http" default:"9000" description:"grpc-gateway server pot"`
+	GRPCPort   int    `long:"grpc" default:"8000" description:"grpc server pot"`
+	HTTPPort   int    `long:"http" default:"9000" description:"grpc-gateway server pot"`
+	Cert       string `long:"cert" default:"" description:"certification path"`
+	PrivateKey string `long:"key" default:"" description:"private key path"`
 }
 
 type ClientOptions struct {

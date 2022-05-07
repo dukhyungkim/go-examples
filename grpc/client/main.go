@@ -18,7 +18,7 @@ import (
 func main() {
 	opts, err := config.ParseClientFlags()
 	if err != nil {
-		log.Fatalln(err)
+		log.Panicln(err)
 	}
 
 	var conn *grpc.ClientConn
@@ -26,17 +26,17 @@ func main() {
 	if opts.Cert != "" {
 		tlsCredentials, err := loadTLSCredentials(opts.Cert)
 		if err != nil {
-			log.Fatal("cannot load TLS credentials: ", err)
+			log.Panicln("cannot load TLS credentials: ", err)
 		}
 
 		conn, err = grpc.Dial(opts.Target, grpc.WithTransportCredentials(tlsCredentials), grpc.WithBlock())
 		if err != nil {
-			log.Fatalf("did not connect: %v", err)
+			log.Panicf("did not connect: %v", err)
 		}
 	} else {
 		conn, err = grpc.Dial(opts.Target, grpc.WithInsecure(), grpc.WithBlock())
 		if err != nil {
-			log.Fatalf("did not connect: %v", err)
+			log.Panicf("did not connect: %v", err)
 		}
 	}
 	defer conn.Close()
