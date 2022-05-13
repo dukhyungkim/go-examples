@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"log"
 
 	"github.com/minio/minio-go/v7"
@@ -17,8 +18,20 @@ func main() {
 		Secure: true,
 	})
 	if err != nil {
-		log.Fatalln(err)
+		log.Panicln(err)
 	}
-
 	log.Printf("%#v\n", minioClient)
+
+	ctx := context.Background()
+	bucketName := "00test"
+	objectName := "Golock Holmes.png"
+	filePath := "/Users/kimdh/Dropbox/Images/Golock Holmes.png"
+	contentType := "image/png"
+	info, err := minioClient.FPutObject(ctx, bucketName, objectName, filePath, minio.PutObjectOptions{
+		ContentType: contentType,
+	})
+	if err != nil {
+		log.Panicln(err)
+	}
+	log.Printf("Successfully uploaded %s of size %d\n", objectName, info.Size)
 }
