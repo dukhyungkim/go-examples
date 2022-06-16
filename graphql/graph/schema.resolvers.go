@@ -1,3 +1,4 @@
+package graph
 
 // This file will be automatically regenerated based on the schema, any resolver implementations
 // will be copied through when generating and any unknown code will be moved to the end.
@@ -26,7 +27,14 @@ func (r *mutationResolver) RefreshToken(ctx context.Context, input *model.Refres
 }
 
 func (r *queryResolver) Links(ctx context.Context) ([]*model.Link, error) {
-	panic(fmt.Errorf("not implemented"))
+	var links []*model.Link
+	dummyLink := model.Link{
+		Title:   "dummyLink",
+		Address: "https://address.org",
+		User:    &model.User{Name: "admin"},
+	}
+	links = append(links, &dummyLink)
+	return links, nil
 }
 
 // Mutation returns generated.MutationResolver implementation.
