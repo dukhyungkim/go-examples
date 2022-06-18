@@ -1,0 +1,27 @@
+go 1.18
+
+use (
+	./bcrypt
+	./database
+	./docker
+	./elasticsearch
+	./etcd
+	./fiber
+	./gobyexample
+	./graphql
+	./grpc
+	./harbor
+	./json
+	./jwt
+	./minio
+	./mongodb
+	./nats
+	./redis
+	./reflrection
+	./rxgo
+	./ssh
+	./unittest
+	./viper
+	./wasm
+	./yaml
+)
