@@ -1,8 +1,8 @@
 package main
 
 import (
-	"go-examples/graphql/graph"
-	"go-examples/graphql/graph/generated"
+	"graphql/graph"
+	"graphql/graph/generated"
 	"log"
 	"net/http"
 	"os"

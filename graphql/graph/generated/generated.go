@@ -7,7 +7,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"go-examples/graphql/graph/model"
+	"graphql/graph/model"
 	"strconv"
 	"sync"
 	"sync/atomic"
@@ -316,7 +316,7 @@ func (ec *executionContext) field_Mutation_createLink_args(ctx context.Context, 
 	var arg0 model.NewLink
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
-		arg0, err = ec.unmarshalNNewLink2goᚑexamplesᚋgraphqlᚋgraphᚋmodelᚐNewLink(ctx, tmp)
+		arg0, err = ec.unmarshalNNewLink2graphqlᚋgraphᚋmodelᚐNewLink(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -331,7 +331,7 @@ func (ec *executionContext) field_Mutation_createUser_args(ctx context.Context, 
 	var arg0 model.NewUser
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
-		arg0, err = ec.unmarshalNNewUser2goᚑexamplesᚋgraphqlᚋgraphᚋmodelᚐNewUser(ctx, tmp)
+		arg0, err = ec.unmarshalNNewUser2graphqlᚋgraphᚋmodelᚐNewUser(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -346,7 +346,7 @@ func (ec *executionContext) field_Mutation_login_args(ctx context.Context, rawAr
 	var arg0 model.Login
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
-		arg0, err = ec.unmarshalNLogin2goᚑexamplesᚋgraphqlᚋgraphᚋmodelᚐLogin(ctx, tmp)
+		arg0, err = ec.unmarshalNLogin2graphqlᚋgraphᚋmodelᚐLogin(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -361,7 +361,7 @@ func (ec *executionContext) field_Mutation_refreshToken_args(ctx context.Context
 	var arg0 *model.RefreshTokenInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
-		arg0, err = ec.unmarshalORefreshTokenInput2ᚖgoᚑexamplesᚋgraphqlᚋgraphᚋmodelᚐRefreshTokenInput(ctx, tmp)
+		arg0, err = ec.unmarshalORefreshTokenInput2ᚖgraphqlᚋgraphᚋmodelᚐRefreshTokenInput(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -583,7 +583,7 @@ func (ec *executionContext) _Link_user(ctx context.Context, field graphql.Collec
 	}
 	res := resTmp.(*model.User)
 	fc.Result = res
-	return ec.marshalNUser2ᚖgoᚑexamplesᚋgraphqlᚋgraphᚋmodelᚐUser(ctx, field.Selections, res)
+	return ec.marshalNUser2ᚖgraphqlᚋgraphᚋmodelᚐUser(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_Link_user(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -633,7 +633,7 @@ func (ec *executionContext) _Mutation_createLink(ctx context.Context, field grap
 	}
 	res := resTmp.(*model.Link)
 	fc.Result = res
-	return ec.marshalNLink2ᚖgoᚑexamplesᚋgraphqlᚋgraphᚋmodelᚐLink(ctx, field.Selections, res)
+	return ec.marshalNLink2ᚖgraphqlᚋgraphᚋmodelᚐLink(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_Mutation_createLink(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -863,7 +863,7 @@ func (ec *executionContext) _Query_links(ctx context.Context, field graphql.Coll
 	}
 	res := resTmp.([]*model.Link)
 	fc.Result = res
-	return ec.marshalNLink2ᚕᚖgoᚑexamplesᚋgraphqlᚋgraphᚋmodelᚐLinkᚄ(ctx, field.Selections, res)
+	return ec.marshalNLink2ᚕᚖgraphqlᚋgraphᚋmodelᚐLinkᚄ(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_Query_links(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -3566,11 +3566,11 @@ func (ec *executionContext) marshalNID2string(ctx context.Context, sel ast.Selec
 	return res
 }
 
-func (ec *executionContext) marshalNLink2goᚑexamplesᚋgraphqlᚋgraphᚋmodelᚐLink(ctx context.Context, sel ast.SelectionSet, v model.Link) graphql.Marshaler {
+func (ec *executionContext) marshalNLink2graphqlᚋgraphᚋmodelᚐLink(ctx context.Context, sel ast.SelectionSet, v model.Link) graphql.Marshaler {
 	return ec._Link(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNLink2ᚕᚖgoᚑexamplesᚋgraphqlᚋgraphᚋmodelᚐLinkᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.Link) graphql.Marshaler {
+func (ec *executionContext) marshalNLink2ᚕᚖgraphqlᚋgraphᚋmodelᚐLinkᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.Link) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -3594,7 +3594,7 @@ func (ec *executionContext) marshalNLink2ᚕᚖgoᚑexamplesᚋgraphqlᚋgraph�
 			if !isLen1 {
 				defer wg.Done()
 			}
-			ret[i] = ec.marshalNLink2ᚖgoᚑexamplesᚋgraphqlᚋgraphᚋmodelᚐLink(ctx, sel, v[i])
+			ret[i] = ec.marshalNLink2ᚖgraphqlᚋgraphᚋmodelᚐLink(ctx, sel, v[i])
 		}
 		if isLen1 {
 			f(i)
@@ -3614,7 +3614,7 @@ func (ec *executionContext) marshalNLink2ᚕᚖgoᚑexamplesᚋgraphqlᚋgraph�
 	return ret
 }
 
-func (ec *executionContext) marshalNLink2ᚖgoᚑexamplesᚋgraphqlᚋgraphᚋmodelᚐLink(ctx context.Context, sel ast.SelectionSet, v *model.Link) graphql.Marshaler {
+func (ec *executionContext) marshalNLink2ᚖgraphqlᚋgraphᚋmodelᚐLink(ctx context.Context, sel ast.SelectionSet, v *model.Link) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
@@ -3624,17 +3624,17 @@ func (ec *executionContext) marshalNLink2ᚖgoᚑexamplesᚋgraphqlᚋgraphᚋmo
 	return ec._Link(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNLogin2goᚑexamplesᚋgraphqlᚋgraphᚋmodelᚐLogin(ctx context.Context, v interface{}) (model.Login, error) {
+func (ec *executionContext) unmarshalNLogin2graphqlᚋgraphᚋmodelᚐLogin(ctx context.Context, v interface{}) (model.Login, error) {
 	res, err := ec.unmarshalInputLogin(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) unmarshalNNewLink2goᚑexamplesᚋgraphqlᚋgraphᚋmodelᚐNewLink(ctx context.Context, v interface{}) (model.NewLink, error) {
+func (ec *executionContext) unmarshalNNewLink2graphqlᚋgraphᚋmodelᚐNewLink(ctx context.Context, v interface{}) (model.NewLink, error) {
 	res, err := ec.unmarshalInputNewLink(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) unmarshalNNewUser2goᚑexamplesᚋgraphqlᚋgraphᚋmodelᚐNewUser(ctx context.Context, v interface{}) (model.NewUser, error) {
+func (ec *executionContext) unmarshalNNewUser2graphqlᚋgraphᚋmodelᚐNewUser(ctx context.Context, v interface{}) (model.NewUser, error) {
 	res, err := ec.unmarshalInputNewUser(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
@@ -3654,7 +3654,7 @@ func (ec *executionContext) marshalNString2string(ctx context.Context, sel ast.S
 	return res
 }
 
-func (ec *executionContext) marshalNUser2ᚖgoᚑexamplesᚋgraphqlᚋgraphᚋmodelᚐUser(ctx context.Context, sel ast.SelectionSet, v *model.User) graphql.Marshaler {
+func (ec *executionContext) marshalNUser2ᚖgraphqlᚋgraphᚋmodelᚐUser(ctx context.Context, sel ast.SelectionSet, v *model.User) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
@@ -3943,7 +3943,7 @@ func (ec *executionContext) marshalOBoolean2ᚖbool(ctx context.Context, sel ast
 	return res
 }
 
-func (ec *executionContext) unmarshalORefreshTokenInput2ᚖgoᚑexamplesᚋgraphqlᚋgraphᚋmodelᚐRefreshTokenInput(ctx context.Context, v interface{}) (*model.RefreshTokenInput, error) {
+func (ec *executionContext) unmarshalORefreshTokenInput2ᚖgraphqlᚋgraphᚋmodelᚐRefreshTokenInput(ctx context.Context, v interface{}) (*model.RefreshTokenInput, error) {
 	if v == nil {
 		return nil, nil
 	}

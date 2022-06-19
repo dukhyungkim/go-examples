@@ -6,8 +6,8 @@ package graph
 import (
 	"context"
 	"fmt"
-	"go-examples/graphql/graph/generated"
-	"go-examples/graphql/graph/model"
+	"graphql/graph/generated"
+	"graphql/graph/model"
 )
 
 func (r *mutationResolver) CreateLink(ctx context.Context, input model.NewLink) (*model.Link, error) {
