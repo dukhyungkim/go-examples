@@ -6,17 +6,27 @@ package graph
 import (
 	"context"
 	"fmt"
+	"graphql/entity"
 	"graphql/graph/generated"
 	"graphql/graph/model"
 )
 
 func (r *mutationResolver) CreateLink(ctx context.Context, input model.NewLink) (*model.Link, error) {
 	var link model.Link
-	var user model.User
-	link.Address = input.Address
 	link.Title = input.Title
-	user.Name = "test"
-	link.User = &user
+	link.Address = input.Address
+
+	linkEntity, err := entity.NewLink(&link)
+	if err != nil {
+		return nil, err
+	}
+
+	linkID, err := r.repo.SaveLink(linkEntity)
+	if err != nil {
+		return nil, err
+	}
+
+	link.ID = fmt.Sprint(linkID)
 	return &link, nil
 }
 
@@ -33,14 +43,16 @@ func (r *mutationResolver) RefreshToken(ctx context.Context, input *model.Refres
 }
 
 func (r *queryResolver) Links(ctx context.Context) ([]*model.Link, error) {
-	var links []*model.Link
-	dummyLink := model.Link{
-		Title:   "dummyLink",
-		Address: "https://address.org",
-		User:    &model.User{Name: "admin"},
+	fetchedLinks, err := r.repo.FetchLinks()
+	if err != nil {
+		return nil, err
 	}
-	links = append(links, &dummyLink)
-	return links, nil
+
+	resultLinks := make([]*model.Link, len(fetchedLinks))
+	for i, link := range fetchedLinks {
+		resultLinks[i] = link.ToModel()
+	}
+	return resultLinks, nil
 }
 
 // Mutation returns generated.MutationResolver implementation.

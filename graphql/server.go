@@ -1,6 +1,8 @@
 package main
 
 import (
+	"graphql/config"
+	"graphql/database"
 	"graphql/graph"
 	"graphql/graph/generated"
 	"log"
@@ -14,12 +16,23 @@ import (
 const defaultPort = "8080"
 
 func main() {
+	cfg, err := config.NewConfig("./config.yml")
+	if err != nil {
+		log.Panicln(err)
+	}
+
+	repo, err := database.NewRepository(cfg.Database)
+	if err != nil {
+		log.Panicln(err)
+	}
+
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = defaultPort
 	}
 
-	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &graph.Resolver{}}))
+	resolver := graph.NewResolver(repo)
+	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: resolver}))
 
 	http.Handle("/", playground.Handler("GraphQL playground", "/query"))
 	http.Handle("/query", srv)
