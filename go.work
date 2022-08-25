@@ -24,4 +24,5 @@ use (
 	./viper
 	./wasm
 	./yaml
+	sqlc
 )
