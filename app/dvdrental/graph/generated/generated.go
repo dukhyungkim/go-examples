@@ -463,8 +463,8 @@ type Customer {
 }
 
 input Pagination {
-    Offset: Int
-    Limit: Int
+    offset: Int
+    limit: Int
 }
 
 type Query {
@@ -4119,25 +4119,25 @@ func (ec *executionContext) unmarshalInputPagination(ctx context.Context, obj in
 		asMap[k] = v
 	}
 
-	fieldsInOrder := [...]string{"Offset", "Limit"}
+	fieldsInOrder := [...]string{"offset", "limit"}
 	for _, k := range fieldsInOrder {
 		v, ok := asMap[k]
 		if !ok {
 			continue
 		}
 		switch k {
-		case "Offset":
+		case "offset":
 			var err error
 
-			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("Offset"))
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("offset"))
 			it.Offset, err = ec.unmarshalOInt2ᚖint(ctx, v)
 			if err != nil {
 				return it, err
 			}
-		case "Limit":
+		case "limit":
 			var err error
 
-			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("Limit"))
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("limit"))
 			it.Limit, err = ec.unmarshalOInt2ᚖint(ctx, v)
 			if err != nil {
 				return it, err

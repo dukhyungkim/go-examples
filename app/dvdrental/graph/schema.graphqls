@@ -40,8 +40,8 @@ type Customer {
 }
 
 input Pagination {
-    Offset: Int
-    Limit: Int
+    offset: Int
+    limit: Int
 }
 
 type Query {

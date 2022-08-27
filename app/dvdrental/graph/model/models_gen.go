@@ -42,6 +42,6 @@ type Film struct {
 }
 
 type Pagination struct {
-	Offset *int `json:"Offset"`
-	Limit  *int `json:"Limit"`
+	Offset *int `json:"offset"`
+	Limit  *int `json:"limit"`
 }

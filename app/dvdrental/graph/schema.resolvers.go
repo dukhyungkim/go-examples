@@ -31,7 +31,29 @@ func (r *queryResolver) Film(ctx context.Context, id int) (*model.Film, error) {
 
 // Films is the resolver for the films field.
 func (r *queryResolver) Films(ctx context.Context, page *model.Pagination) ([]*model.Film, error) {
-	panic(fmt.Errorf("not implemented"))
+	offset := 0
+	limit := 20
+
+	if page != nil {
+		if page.Offset != nil {
+			offset = *page.Offset
+		}
+
+		if page.Limit != nil {
+			limit = *page.Limit
+		}
+	}
+
+	films, err := r.service.ListFilms(ctx, offset, limit)
+	if err != nil {
+		return nil, err
+	}
+
+	results := make([]*model.Film, len(films))
+	for i, film := range films {
+		results[i] = film.ToModel()
+	}
+	return results, nil
 }
 
 // Customer is the resolver for the customer field.

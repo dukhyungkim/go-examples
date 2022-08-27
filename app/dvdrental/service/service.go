@@ -50,8 +50,23 @@ func (s *service) GetFilm(ctx context.Context, filmID int) (*entity.Film, error)
 }
 
 func (s *service) ListFilms(ctx context.Context, offset, limit int) ([]*entity.Film, error) {
-	//TODO implement me
-	panic("implement me")
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
+
+	listFilmsParams := &repository.ListFilmsParams{
+		Limit:  int32(limit),
+		Offset: int32(offset),
+	}
+	films, err := s.database.ListFilms(ctx, listFilmsParams)
+	if err != nil {
+		return nil, err
+	}
+
+	entities := make([]*entity.Film, len(films))
+	for i, film := range films {
+		entities[i] = entity.NewFilm(film)
+	}
+	return entities, nil
 }
 
 func (s *service) GetCustomer(ctx context.Context, customerID int) (*entity.Customer, error) {
