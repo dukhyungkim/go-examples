@@ -1,0 +1,54 @@
+# GraphQL schema example
+#
+# https://gqlgen.com/getting-started/
+
+scalar Time
+
+type Actor {
+    id: ID!
+    first_name: String!
+    last_name: String!
+    last_updates: Time!
+}
+
+type Film {
+    id: ID!
+    title: String!
+    description: String
+    release_year: Int!
+    language_id: ID!
+    rental_duration: Int!
+    rental_rate: String!
+    length: Int
+    replacement_cost: String!
+    rating: String!
+    last_update: Time!
+    special_features: [String!]!
+    fulltext: String!
+}
+
+type Customer {
+    id: ID!
+    store_id: ID!
+    first_name: String!
+    last_name: String!
+    email: String!
+    address_id: ID!
+    create_date: Time!
+    last_update: Time!
+    active: Int!
+}
+
+input Pagination {
+    Offset: Int
+    Limit: Int
+}
+
+type Query {
+    actor(id: Int!): Actor!
+    actors(page: Pagination): [Actor!]!
+    film(id: Int!): Film!
+    films(page: Pagination): [Film!]!
+    customer(id: Int!): Customer!
+    customers(page: Pagination): [Customer!]!
+}

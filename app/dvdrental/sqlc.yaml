@@ -1,7 +1,12 @@
-version: 1
-packages:
-  - path: repository
-    name: repository
-    engine: postgresql
-    schema: schema.sql
+version: 2
+sql:
+  - schema: schema.sql
     queries: query.sql
+    engine: postgresql
+    gen:
+      go:
+        package: repository
+        out: repository
+        emit_interface: true
+        emit_result_struct_pointers: true
+        emit_params_struct_pointers: true

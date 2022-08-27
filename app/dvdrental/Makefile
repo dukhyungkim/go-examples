@@ -5,3 +5,5 @@ build:
 sql:
 	sqlc generate
 
+graphql:
+	gqlgen generate

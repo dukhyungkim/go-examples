@@ -18,7 +18,7 @@ WHERE actor_id = $1
 LIMIT 1
 `
 
-func (q *Queries) GetActor(ctx context.Context, actorID int32) (Actor, error) {
+func (q *Queries) GetActor(ctx context.Context, actorID int32) (*Actor, error) {
 	row := q.db.QueryRowContext(ctx, getActor, actorID)
 	var i Actor
 	err := row.Scan(
@@ -27,7 +27,7 @@ func (q *Queries) GetActor(ctx context.Context, actorID int32) (Actor, error) {
 		&i.LastName,
 		&i.LastUpdate,
 	)
-	return i, err
+	return &i, err
 }
 
 const getCustomer = `-- name: GetCustomer :one
@@ -37,7 +37,7 @@ WHERE customer_id = $1
 LIMIT 1
 `
 
-func (q *Queries) GetCustomer(ctx context.Context, customerID int32) (Customer, error) {
+func (q *Queries) GetCustomer(ctx context.Context, customerID int32) (*Customer, error) {
 	row := q.db.QueryRowContext(ctx, getCustomer, customerID)
 	var i Customer
 	err := row.Scan(
@@ -52,7 +52,7 @@ func (q *Queries) GetCustomer(ctx context.Context, customerID int32) (Customer, 
 		&i.LastUpdate,
 		&i.Active,
 	)
-	return i, err
+	return &i, err
 }
 
 const getFilm = `-- name: GetFilm :one
@@ -62,7 +62,7 @@ WHERE film_id = $1
 LIMIT 1
 `
 
-func (q *Queries) GetFilm(ctx context.Context, filmID int32) (Film, error) {
+func (q *Queries) GetFilm(ctx context.Context, filmID int32) (*Film, error) {
 	row := q.db.QueryRowContext(ctx, getFilm, filmID)
 	var i Film
 	err := row.Scan(
@@ -80,7 +80,7 @@ func (q *Queries) GetFilm(ctx context.Context, filmID int32) (Film, error) {
 		pq.Array(&i.SpecialFeatures),
 		&i.Fulltext,
 	)
-	return i, err
+	return &i, err
 }
 
 const listActors = `-- name: ListActors :many
@@ -95,13 +95,13 @@ type ListActorsParams struct {
 	Offset int32
 }
 
-func (q *Queries) ListActors(ctx context.Context, arg ListActorsParams) ([]Actor, error) {
+func (q *Queries) ListActors(ctx context.Context, arg *ListActorsParams) ([]*Actor, error) {
 	rows, err := q.db.QueryContext(ctx, listActors, arg.Limit, arg.Offset)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
-	var items []Actor
+	var items []*Actor
 	for rows.Next() {
 		var i Actor
 		if err := rows.Scan(
@@ -112,7 +112,7 @@ func (q *Queries) ListActors(ctx context.Context, arg ListActorsParams) ([]Actor
 		); err != nil {
 			return nil, err
 		}
-		items = append(items, i)
+		items = append(items, &i)
 	}
 	if err := rows.Close(); err != nil {
 		return nil, err
@@ -135,13 +135,13 @@ type ListCustomersParams struct {
 	Offset int32
 }
 
-func (q *Queries) ListCustomers(ctx context.Context, arg ListCustomersParams) ([]Customer, error) {
+func (q *Queries) ListCustomers(ctx context.Context, arg *ListCustomersParams) ([]*Customer, error) {
 	rows, err := q.db.QueryContext(ctx, listCustomers, arg.Limit, arg.Offset)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
-	var items []Customer
+	var items []*Customer
 	for rows.Next() {
 		var i Customer
 		if err := rows.Scan(
@@ -158,7 +158,7 @@ func (q *Queries) ListCustomers(ctx context.Context, arg ListCustomersParams) ([
 		); err != nil {
 			return nil, err
 		}
-		items = append(items, i)
+		items = append(items, &i)
 	}
 	if err := rows.Close(); err != nil {
 		return nil, err
@@ -181,13 +181,13 @@ type ListFilmsParams struct {
 	Offset int32
 }
 
-func (q *Queries) ListFilms(ctx context.Context, arg ListFilmsParams) ([]Film, error) {
+func (q *Queries) ListFilms(ctx context.Context, arg *ListFilmsParams) ([]*Film, error) {
 	rows, err := q.db.QueryContext(ctx, listFilms, arg.Limit, arg.Offset)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
-	var items []Film
+	var items []*Film
 	for rows.Next() {
 		var i Film
 		if err := rows.Scan(
@@ -207,7 +207,7 @@ func (q *Queries) ListFilms(ctx context.Context, arg ListFilmsParams) ([]Film, e
 		); err != nil {
 			return nil, err
 		}
-		items = append(items, i)
+		items = append(items, &i)
 	}
 	if err := rows.Close(); err != nil {
 		return nil, err
