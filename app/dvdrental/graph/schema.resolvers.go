@@ -12,12 +12,28 @@ import (
 
 // Actor is the resolver for the actor field.
 func (r *queryResolver) Actor(ctx context.Context, id int) (*model.Actor, error) {
-	panic(fmt.Errorf("not implemented"))
+	actor, err := r.service.GetActor(ctx, id)
+	if err != nil {
+		return nil, err
+	}
+	return actor.ToModel(), nil
 }
 
 // Actors is the resolver for the actors field.
 func (r *queryResolver) Actors(ctx context.Context, page *model.Pagination) ([]*model.Actor, error) {
-	panic(fmt.Errorf("not implemented"))
+	offset := page.GetOffset()
+	limit := page.GetLimit()
+
+	actors, err := r.service.ListActors(ctx, offset, limit)
+	if err != nil {
+		return nil, err
+	}
+
+	results := make([]*model.Actor, len(actors))
+	for i, actor := range actors {
+		results[i] = actor.ToModel()
+	}
+	return results, nil
 }
 
 // Film is the resolver for the film field.
@@ -31,18 +47,8 @@ func (r *queryResolver) Film(ctx context.Context, id int) (*model.Film, error) {
 
 // Films is the resolver for the films field.
 func (r *queryResolver) Films(ctx context.Context, page *model.Pagination) ([]*model.Film, error) {
-	offset := 0
-	limit := 20
-
-	if page != nil {
-		if page.Offset != nil {
-			offset = *page.Offset
-		}
-
-		if page.Limit != nil {
-			limit = *page.Limit
-		}
-	}
+	offset := page.GetOffset()
+	limit := page.GetLimit()
 
 	films, err := r.service.ListFilms(ctx, offset, limit)
 	if err != nil {
