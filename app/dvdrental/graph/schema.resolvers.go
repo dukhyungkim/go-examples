@@ -7,7 +7,6 @@ import (
 	"context"
 	"dvdrental/graph/generated"
 	"dvdrental/graph/model"
-	"fmt"
 )
 
 // Actor is the resolver for the actor field.
@@ -64,12 +63,28 @@ func (r *queryResolver) Films(ctx context.Context, page *model.Pagination) ([]*m
 
 // Customer is the resolver for the customer field.
 func (r *queryResolver) Customer(ctx context.Context, id int) (*model.Customer, error) {
-	panic(fmt.Errorf("not implemented"))
+	customer, err := r.service.GetCustomer(ctx, id)
+	if err != nil {
+		return nil, err
+	}
+	return customer.ToModel(), nil
 }
 
 // Customers is the resolver for the customers field.
 func (r *queryResolver) Customers(ctx context.Context, page *model.Pagination) ([]*model.Customer, error) {
-	panic(fmt.Errorf("not implemented"))
+	offset := page.GetOffset()
+	limit := page.GetLimit()
+
+	customers, err := r.service.ListCustomers(ctx, offset, limit)
+	if err != nil {
+		return nil, err
+	}
+
+	results := make([]*model.Customer, len(customers))
+	for i, customer := range customers {
+		results[i] = customer.ToModel()
+	}
+	return results, nil
 }
 
 // Query returns generated.QueryResolver implementation.

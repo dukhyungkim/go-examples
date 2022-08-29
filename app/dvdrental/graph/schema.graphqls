@@ -35,8 +35,8 @@ type Customer {
     email: String!
     address_id: ID!
     create_date: Time!
-    last_update: Time!
-    active: Int!
+    last_update: Time
+    active: Int
 }
 
 input Pagination {

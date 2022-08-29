@@ -14,15 +14,15 @@ type Actor struct {
 }
 
 type Customer struct {
-	ID         string    `json:"id"`
-	StoreID    string    `json:"store_id"`
-	FirstName  string    `json:"first_name"`
-	LastName   string    `json:"last_name"`
-	Email      string    `json:"email"`
-	AddressID  string    `json:"address_id"`
-	CreateDate time.Time `json:"create_date"`
-	LastUpdate time.Time `json:"last_update"`
-	Active     int       `json:"active"`
+	ID         string     `json:"id"`
+	StoreID    string     `json:"store_id"`
+	FirstName  string     `json:"first_name"`
+	LastName   string     `json:"last_name"`
+	Email      string     `json:"email"`
+	AddressID  string     `json:"address_id"`
+	CreateDate time.Time  `json:"create_date"`
+	LastUpdate *time.Time `json:"last_update"`
+	Active     *int       `json:"active"`
 }
 
 type Film struct {

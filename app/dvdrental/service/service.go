@@ -91,11 +91,32 @@ func (s *service) ListFilms(ctx context.Context, offset, limit int) ([]*entity.F
 }
 
 func (s *service) GetCustomer(ctx context.Context, customerID int) (*entity.Customer, error) {
-	//TODO implement me
-	panic("implement me")
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
+
+	customer, err := s.database.GetCustomer(ctx, int32(customerID))
+	if err != nil {
+		return nil, err
+	}
+	return entity.NewCustomer(customer), nil
 }
 
 func (s *service) ListCustomers(ctx context.Context, offset, limit int) ([]*entity.Customer, error) {
-	//TODO implement me
-	panic("implement me")
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
+
+	listCustomersParams := &repository.ListCustomersParams{
+		Limit:  int32(limit),
+		Offset: int32(offset),
+	}
+	customers, err := s.database.ListCustomers(ctx, listCustomersParams)
+	if err != nil {
+		return nil, err
+	}
+
+	entities := make([]*entity.Customer, len(customers))
+	for i, customer := range customers {
+		entities[i] = entity.NewCustomer(customer)
+	}
+	return entities, nil
 }
