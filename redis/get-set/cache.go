@@ -1,17 +1,16 @@
 package main
 
 import (
-	"go-examples/common/config"
 	"time"
 
-	"github.com/go-redis/redis/v8"
+	"github.com/redis/go-redis/v9"
 )
 
 type Cache struct {
 	rdb *redis.Client
 }
 
-func NewCache(cfg *config.Redis) *Cache {
+func NewCache(cfg *Redis) *Cache {
 	rdb := redis.NewClient(&redis.Options{
 		Addr:     cfg.Server,
 		Username: cfg.Username,

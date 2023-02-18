@@ -1,7 +1,6 @@
 package main
 
 import (
-	"go-examples/common/config"
 	"testing"
 
 	"github.com/alicebob/miniredis/v2"
@@ -29,7 +28,7 @@ func TestNewCache(t *testing.T) {
 	}
 	defer s.Close()
 
-	cfg := &config.Redis{
+	cfg := &Redis{
 		Server: s.Addr(),
 	}
 	cache := NewCache(cfg)
@@ -43,13 +42,13 @@ func TestCache_SetValue(t *testing.T) {
 	}
 	defer s.Close()
 
-	cfg := &config.Redis{
+	cfg := &Redis{
 		Server: s.Addr(),
 	}
 	cache := NewCache(cfg)
 
 	for _, tt := range tests {
-		err := cache.SetValue(tt.key, tt.value)
+		err = cache.SetValue(tt.key, tt.value)
 		assert.NoError(t, err)
 	}
 }
@@ -61,13 +60,13 @@ func TestCache_GetValue(t *testing.T) {
 	}
 	defer s.Close()
 
-	cfg := &config.Redis{
+	cfg := &Redis{
 		Server: s.Addr(),
 	}
 	cache := NewCache(cfg)
 
 	for _, tt := range tests {
-		err := s.Set(tt.key, tt.value)
+		err = s.Set(tt.key, tt.value)
 		assert.NoError(t, err)
 
 		val, err := cache.GetValue(tt.key)

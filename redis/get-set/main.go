@@ -3,10 +3,9 @@ package main
 import (
 	"context"
 	"fmt"
-	"go-examples/common/config"
 	"log"
 
-	"github.com/go-redis/redis/v8"
+	"github.com/redis/go-redis/v9"
 )
 
 const (
@@ -18,12 +17,12 @@ const (
 var ctx = context.Background()
 
 func main() {
-	opts, err := config.ParseFlags()
+	opts, err := ParseFlags()
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	cfg, err := config.NewConfig(opts.ConfigPath)
+	cfg, err := NewConfig(opts.ConfigPath)
 	if err != nil {
 		log.Fatalf("Cannot access config: %v\n", err)
 	}
