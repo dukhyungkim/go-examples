@@ -2,13 +2,14 @@ package main
 
 import (
 	"context"
-	pb "go-examples/proto/helloworld"
+	pb "grpc/proto/helloworld"
 	"log"
 	"net"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/test/bufconn"
 )
 
@@ -33,11 +34,15 @@ func bufDialer(context.Context, string) (net.Conn, error) {
 
 func TestSayHello(t *testing.T) {
 	ctx := context.Background()
-	conn, err := grpc.DialContext(ctx, "bufnet", grpc.WithContextDialer(bufDialer), grpc.WithInsecure())
+	conn, err := grpc.DialContext(ctx, "bufnet", grpc.WithContextDialer(bufDialer), grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		t.Fatalf("Failed to dial bufnet: %v", err)
 	}
-	defer conn.Close()
+	defer func() {
+		if err = conn.Close(); err != nil {
+			log.Println(err)
+		}
+	}()
 
 	client := pb.NewGreeterClient(conn)
 

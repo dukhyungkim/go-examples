@@ -7,28 +7,29 @@ import (
 	"net/http"
 	"strings"
 
-	grpc_auth "github.com/grpc-ecosystem/go-grpc-middleware/auth"
+	grpcAuth "github.com/grpc-ecosystem/go-grpc-middleware/auth"
 	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/status"
 
 	"github.com/grpc-ecosystem/go-grpc-middleware"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"google.golang.org/grpc"
 
-	helloworldpb "go-examples/proto/helloworld"
+	pb "grpc/proto/helloworld"
 )
 
 type server struct {
-	helloworldpb.GreeterServer
+	pb.GreeterServer
 }
 
-func NewServer() *server {
+func newServer() *server {
 	return &server{}
 }
 
-func (s *server) SayHello(ctx context.Context, in *helloworldpb.HelloRequest) (*helloworldpb.HelloReply, error) {
+func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
 	log.Println("token:", ctx.Value("token"))
-	return &helloworldpb.HelloReply{Message: in.Name + " world"}, nil
+	return &pb.HelloReply{Message: in.Name + " world"}, nil
 }
 
 func myAuthFunc(ctx context.Context) (context.Context, error) {
@@ -39,7 +40,7 @@ func myAuthFunc(ctx context.Context) (context.Context, error) {
 	log.Println("method:", method)
 	log.Println("is SayHello?:", strings.Contains(method, "SayHello"))
 
-	token, err := grpc_auth.AuthFromMD(ctx, "bearer")
+	token, err := grpcAuth.AuthFromMD(ctx, "bearer")
 	if err != nil {
 		return nil, err
 	}
@@ -61,10 +62,10 @@ func main() {
 
 	// Create a gRPC server object
 	s := grpc.NewServer(grpc.UnaryInterceptor(grpc_middleware.ChainUnaryServer(
-		grpc_auth.UnaryServerInterceptor(myAuthFunc),
+		grpcAuth.UnaryServerInterceptor(myAuthFunc),
 	)))
 	// Attach the Greeter service to the server
-	helloworldpb.RegisterGreeterServer(s, NewServer())
+	pb.RegisterGreeterServer(s, newServer())
 	// Serve gRPC server
 	log.Println("Serving gRPC on 0.0.0.0:8080")
 	go func() {
@@ -77,7 +78,7 @@ func main() {
 		context.Background(),
 		"0.0.0.0:8080",
 		grpc.WithBlock(),
-		grpc.WithInsecure(),
+		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	)
 	if err != nil {
 		log.Fatalln("Failed to dial server:", err)
@@ -85,7 +86,7 @@ func main() {
 
 	gwmux := runtime.NewServeMux()
 	// Register Greeter
-	err = helloworldpb.RegisterGreeterHandler(context.Background(), gwmux, conn)
+	err = pb.RegisterGreeterHandler(context.Background(), gwmux, conn)
 	if err != nil {
 		log.Fatalln("Failed to register gateway:", err)
 	}

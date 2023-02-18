@@ -7,29 +7,30 @@ import (
 	"net"
 	"net/http"
 
+	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/metadata"
 
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"google.golang.org/grpc"
 
-	helloworldpb "go-examples/proto/helloworld"
+	pb "grpc/proto/helloworld"
 )
 
 type server struct {
-	helloworldpb.GreeterServer
+	pb.GreeterServer
 }
 
-func NewServer() *server {
+func newServer() *server {
 	return &server{}
 }
 
-func (s *server) SayHello(ctx context.Context, in *helloworldpb.HelloRequest) (*helloworldpb.HelloReply, error) {
+func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
 	md, ok := metadata.FromIncomingContext(ctx)
 	if !ok {
 		return nil, fmt.Errorf("failed to get metadata from incoming context")
 	}
 	log.Println("Authorization:", md.Get("Authorization"))
-	return &helloworldpb.HelloReply{Message: in.Name + " world"}, nil
+	return &pb.HelloReply{Message: in.Name + " world"}, nil
 }
 
 func main() {
@@ -42,7 +43,7 @@ func main() {
 	// Create a gRPC server object
 	s := grpc.NewServer()
 	// Attach the Greeter service to the server
-	helloworldpb.RegisterGreeterServer(s, NewServer())
+	pb.RegisterGreeterServer(s, newServer())
 	// Serve gRPC server
 	log.Println("Serving gRPC on 0.0.0.0:8080")
 	go func() {
@@ -55,7 +56,7 @@ func main() {
 		context.Background(),
 		"0.0.0.0:8080",
 		grpc.WithBlock(),
-		grpc.WithInsecure(),
+		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	)
 	if err != nil {
 		log.Fatalln("Failed to dial server:", err)
@@ -63,7 +64,7 @@ func main() {
 
 	gwmux := runtime.NewServeMux()
 	// Register Greeter
-	err = helloworldpb.RegisterGreeterHandler(context.Background(), gwmux, conn)
+	err = pb.RegisterGreeterHandler(context.Background(), gwmux, conn)
 	if err != nil {
 		log.Fatalln("Failed to register gateway:", err)
 	}

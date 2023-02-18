@@ -5,14 +5,15 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"fmt"
-	"go-examples/common/config"
-	pb "go-examples/proto/helloworld"
-	"io/ioutil"
+	"grpc/config"
+	pb "grpc/proto/helloworld"
 	"log"
+	"os"
 	"time"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/credentials/insecure"
 )
 
 func main() {
@@ -34,12 +35,16 @@ func main() {
 			log.Panicf("did not connect: %v", err)
 		}
 	} else {
-		conn, err = grpc.Dial(opts.Target, grpc.WithInsecure(), grpc.WithBlock())
+		conn, err = grpc.Dial(opts.Target, grpc.WithTransportCredentials(insecure.NewCredentials()), grpc.WithBlock())
 		if err != nil {
 			log.Panicf("did not connect: %v", err)
 		}
 	}
-	defer conn.Close()
+	defer func() {
+		if err = conn.Close(); err != nil {
+			log.Println(err)
+		}
+	}()
 	c := pb.NewGreeterClient(conn)
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
@@ -52,7 +57,7 @@ func main() {
 }
 
 func loadTLSCredentials(cert string) (credentials.TransportCredentials, error) {
-	pemServerCA, err := ioutil.ReadFile(cert)
+	pemServerCA, err := os.ReadFile(cert)
 	if err != nil {
 		return nil, err
 	}

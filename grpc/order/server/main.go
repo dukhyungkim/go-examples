@@ -3,14 +3,15 @@ package main
 import (
 	"context"
 	"fmt"
-	"go-examples/common/config"
-	pb "go-examples/proto/order"
+	"grpc/config"
+	pb "grpc/proto/order"
 	"log"
 	"net"
 	"net/http"
 
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 )
 
 type server struct {
@@ -43,7 +44,7 @@ func main() {
 		context.Background(),
 		fmt.Sprintf("0.0.0.0:%d", opts.GRPCPort),
 		grpc.WithBlock(),
-		grpc.WithInsecure(),
+		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	)
 	if err != nil {
 		log.Fatalln("Failed to dial server:", err)

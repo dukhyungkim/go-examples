@@ -3,8 +3,8 @@ package main
 import (
 	"bytes"
 	"context"
-	pb "go-examples/proto/helloworld"
-	"io/ioutil"
+	pb "grpc/proto/helloworld"
+	"io"
 	"log"
 	"net"
 	"net/http"
@@ -14,6 +14,7 @@ import (
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/test/bufconn"
 	"google.golang.org/protobuf/encoding/protojson"
 )
@@ -36,7 +37,7 @@ func init() {
 		"bufnet",
 		grpc.WithBlock(),
 		grpc.WithContextDialer(bufDialer),
-		grpc.WithInsecure(),
+		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	)
 	gwmux := runtime.NewServeMux()
 	if err := pb.RegisterGreeterHandler(context.Background(), gwmux, conn); err != nil {
@@ -85,9 +86,12 @@ func TestSayHello(t *testing.T) {
 		}
 		assert.Equal(t, resp.StatusCode, 200)
 		w, _ := protojson.Marshal(&pb.HelloReply{Message: tt.want})
-		respBody, err := ioutil.ReadAll(resp.Body)
+		respBody, err := io.ReadAll(resp.Body)
 		assert.NoError(t, err)
 		assert.Equal(t, string(w), string(respBody))
-		resp.Body.Close()
+		err = resp.Body.Close()
+		if err != nil {
+			log.Println(err)
+		}
 	}
 }

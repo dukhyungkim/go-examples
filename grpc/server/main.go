@@ -3,8 +3,8 @@ package main
 import (
 	"context"
 	"fmt"
-	"go-examples/common/config"
-	pb "go-examples/proto/helloworld"
+	"grpc/config"
+	pb "grpc/proto/helloworld"
 	"log"
 	"net"
 

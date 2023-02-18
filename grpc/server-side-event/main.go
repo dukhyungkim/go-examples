@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	pb "go-examples/grpc/server-side-event/sse"
+	pb "grpc/server-side-event/sse"
 	"log"
 	"net"
 	"net/http"

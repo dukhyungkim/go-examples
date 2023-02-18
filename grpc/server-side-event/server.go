@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	pb "go-examples/grpc/server-side-event/sse"
+	pb "grpc/server-side-event/sse"
 	"log"
 	"sync"
 	"time"
