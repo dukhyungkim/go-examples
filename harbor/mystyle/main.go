@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"go-examples/common/config"
-	"go-examples/harbor/mystyle/harbor"
-	"go-examples/harbor/mystyle/harbor/model"
+	"harbor/config"
+	"harbor/mystyle/harbor"
+	"harbor/mystyle/harbor/model"
 	"strings"
 )
 

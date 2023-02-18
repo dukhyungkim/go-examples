@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"go-examples/common/config"
+	"harbor/config"
 	"log"
 
 	"github.com/mittwald/goharbor-client/v5/apiv2"

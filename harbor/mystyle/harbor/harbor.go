@@ -1,7 +1,7 @@
 package harbor
 
 import (
-	"go-examples/harbor/mystyle/harbor/model"
+	"harbor/mystyle/harbor/model"
 )
 
 type HarborClient interface {

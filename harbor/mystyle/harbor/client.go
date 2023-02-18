@@ -4,9 +4,8 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
-	"go-examples/harbor/mystyle/harbor/model"
+	"harbor/mystyle/harbor/model"
 	"io"
-	"io/ioutil"
 	"log"
 	"net/http"
 )
@@ -56,20 +55,19 @@ func (c *harborClient) doRequest(req *http.Request) ([]byte, error) {
 		return nil, err
 	}
 	defer func(Body io.ReadCloser) {
-		err := Body.Close()
-		if err != nil {
+		if err = Body.Close(); err != nil {
 			log.Printf("failed to close response body cleanly; %v", err)
 		}
 	}(resp.Body)
 
-	respData, err := ioutil.ReadAll(resp.Body)
+	respData, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
 	}
 
 	if resp.StatusCode != 200 {
 		var errors []*model.Error
-		if err := json.Unmarshal(respData, &errors); err != nil {
+		if err = json.Unmarshal(respData, &errors); err != nil {
 			return nil, err
 		}
 		return nil, nil

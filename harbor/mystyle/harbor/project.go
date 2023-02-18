@@ -2,7 +2,7 @@ package harbor
 
 import (
 	"encoding/json"
-	"go-examples/harbor/mystyle/harbor/model"
+	"harbor/mystyle/harbor/model"
 )
 
 func (c *harborClient) ListProjects(params *model.ListProjectParams) ([]*model.Project, error) {
