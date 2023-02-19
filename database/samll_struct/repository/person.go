@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"go-examples/database/samll_struct/entity"
+	"database/samll_struct/entity"
 
 	"gorm.io/gorm"
 )

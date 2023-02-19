@@ -1,8 +1,8 @@
 package main
 
 import (
-	"go-examples/common/config"
-	"go-examples/database/samll_struct/repository"
+	"database/config"
+	"database/samll_struct/repository"
 	"log"
 )
 

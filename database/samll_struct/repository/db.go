@@ -1,8 +1,8 @@
 package repository
 
 import (
+	"database/config"
 	"fmt"
-	"go-examples/common/config"
 	"net/url"
 
 	"gorm.io/driver/mysql"

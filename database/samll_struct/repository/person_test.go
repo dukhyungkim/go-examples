@@ -1,8 +1,9 @@
 package repository
 
 import (
+	"database/samll_struct/entity"
 	"database/sql/driver"
-	"go-examples/database/samll_struct/entity"
+	"log"
 	"reflect"
 	"testing"
 	"time"
@@ -24,7 +25,11 @@ func (a AnyTime) Match(v driver.Value) bool {
 func TestNewPersonRepository(t *testing.T) {
 	db, _, err := sqlmock.New()
 	assert.NoError(t, err)
-	defer db.Close()
+	defer func() {
+		if err = db.Close(); err != nil {
+			log.Println(err)
+		}
+	}()
 
 	gdb, err := gorm.Open(mysql.New(mysql.Config{Conn: db}), &gorm.Config{})
 	assert.NoError(t, err)
@@ -56,7 +61,11 @@ func TestNewPersonRepository(t *testing.T) {
 func Test_personRepository_CreatePerson(t *testing.T) {
 	db, mock, err := sqlmock.New()
 	assert.NoError(t, err)
-	defer db.Close()
+	defer func() {
+		if err = db.Close(); err != nil {
+			log.Println(err)
+		}
+	}()
 
 	gdb, err := gorm.Open(mysql.New(mysql.Config{
 		Conn:                      db,
@@ -67,8 +76,6 @@ func Test_personRepository_CreatePerson(t *testing.T) {
 	p := NewPersonRepository(&Storage{db: gdb})
 
 	person := entity.Person{
-		Model:   gorm.Model{},
-		Name:    "user",
 		Age:     20,
 		Address: "address",
 		Phone:   "010-1234-5678",
@@ -94,7 +101,7 @@ func Test_personRepository_CreatePerson(t *testing.T) {
 	const insertQuery = "INSERT INTO `person`"
 	mock.ExpectBegin()
 	mock.ExpectExec(insertQuery).
-		WithArgs(AnyTime{}, AnyTime{}, nil, person.Name, person.Age, person.Address, person.Phone).
+		WithArgs(AnyTime{}, AnyTime{}, nil, person.Age, person.Address, person.Phone).
 		WillReturnResult(sqlmock.NewResult(0, 1))
 	mock.ExpectCommit()
 
