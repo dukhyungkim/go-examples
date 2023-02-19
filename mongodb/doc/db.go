@@ -3,8 +3,8 @@ package main
 import (
 	"context"
 	"fmt"
-	"go-examples/common/config"
 	"log"
+	"mongodb/config"
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson"

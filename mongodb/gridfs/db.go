@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"go-examples/common/config"
 	"log"
+	"mongodb/config"
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson"
@@ -64,7 +64,11 @@ func (m *Mongo) UploadPerson(p *Person) error {
 	if err != nil {
 		return err
 	}
-	defer uploadStream.Close()
+	defer func() {
+		if err = uploadStream.Close(); err != nil {
+			log.Println(err)
+		}
+	}()
 
 	b, err := bson.Marshal(p)
 	if err != nil {
@@ -87,7 +91,11 @@ func (m *Mongo) DownloadPeople() ([]*Person, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer cursor.Close(ctx)
+	defer func() {
+		if err = cursor.Close(ctx); err != nil {
+			log.Println(err)
+		}
+	}()
 
 	var fsFiles []*FsFiles
 	if err = cursor.All(ctx, &fsFiles); err != nil {

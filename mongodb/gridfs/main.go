@@ -1,8 +1,8 @@
 package main
 
 import (
-	"go-examples/common/config"
 	"log"
+	"mongodb/config"
 )
 
 var (
