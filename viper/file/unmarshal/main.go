@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"go-examples/common/config"
 	"log"
+	"viper/config"
 
 	"github.com/spf13/viper"
 )
