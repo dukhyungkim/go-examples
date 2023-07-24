@@ -4,6 +4,7 @@ use (
 	./app/dvdrental
 	./bcrypt
 	./database
+	./di/wire
 	./docker
 	./elasticsearch
 	./etcd
